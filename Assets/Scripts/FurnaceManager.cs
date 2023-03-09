@@ -6,20 +6,21 @@ using Sensiks.SDK.Shared.SensiksDataTypes;
 
 public class FurnaceManager : MonoBehaviour
 {
-    private bool fireOn;
-
     [SerializeField]
-    private ParticleSystem fireParticle, smokeparticle;
+    private ParticleSystem fireParticle, smokeParticle;
+    [SerializeField]
+    private float minDistance, maxDistance;
+    [SerializeField]
+    private Transform player;
 
     private float distanceToPlayer;
-
-    private float minDistance, maxDistance;
-    private Transform player;
+    private bool fireOn;
 
     // Start is called before the first frame update
     void Start()
     {
-        fireParticle = GetComponent<ParticleSystem>();
+        //fireParticle = GetComponent<ParticleSystem>();
+        FireOff();
     }
 
     // Update is called once per frame
@@ -27,26 +28,34 @@ public class FurnaceManager : MonoBehaviour
     {
         distanceToPlayer = Vector3.Distance(player.position, fireParticle.GetComponent<Transform>().position);
 
-        if (distanceToPlayer >= minDistance && distanceToPlayer <= maxDistance && fireOn)
+        if (distanceToPlayer >= minDistance && distanceToPlayer <= maxDistance && fireOn == true)
         {
             SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);
-            
-        }
-        else
+            Debug.Log("heater on");
+        } else
         {
             SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0f);
+            Debug.Log("heater off");
         }
     }
 
     public void FireOn(){
         fireParticle.Play();
+        smokeParticle.Play();
         fireOn = true;
     }
 
     public void FireOff()
     {
         fireParticle.Stop();
+        smokeParticle.Stop();
         fireOn = false;
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, minDistance);
+        Gizmos.DrawWireSphere(transform.position, maxDistance);
+    }
 }
