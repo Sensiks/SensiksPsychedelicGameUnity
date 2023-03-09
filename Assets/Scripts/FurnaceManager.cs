@@ -30,11 +30,13 @@ public class FurnaceManager : MonoBehaviour
 
         if (distanceToPlayer >= minDistance && distanceToPlayer <= maxDistance && fireOn == true)
         {
-            SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);
+            SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0.5f);
+            SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0.5f);
             Debug.Log("heater on");
         } else
         {
-            SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0f);
+            SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0f);
+            SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0f);
             Debug.Log("heater off");
         }
     }
