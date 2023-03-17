@@ -10,8 +10,8 @@ public class TrackGenerator : MonoBehaviour
     [SerializeField]
     private bool loopedTrack = false;
 
-    private CinemachinePath.Waypoint[] generatedWaypoints;
-    private int waypointCount;
+    public CinemachinePath.Waypoint[] generatedWaypoints;
+    public int waypointCount;
     int currentWaypointIndex = 0;
     // Start is called before the first frame update
     void Start()
