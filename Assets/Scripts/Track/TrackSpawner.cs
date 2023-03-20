@@ -9,9 +9,10 @@ public class TrackSpawner : MonoBehaviour
     private GameObject straightPrefab, shortStraightPrefab, leftTurnPrefab, rightTurnPrefab;
 
     [SerializeField]
-    private GameObject startingTrack;
+    private GameObject startingTrack, train;
 
     private TrackGenerator trackGenerator;
+    private GameObject track;
 
     private Vector3 spawnPointNewTrack;
 
@@ -22,11 +23,14 @@ public class TrackSpawner : MonoBehaviour
     private int lastWayPoint;
 
     private float distanceTraintoEnd;
+    [SerializeField]
+    private float maxDistanceTraintoEnd;
 
     public List<GameObject> Trackpieces;
     public enum SortOfTrack{
         STRAIGHT, LEFT, RIGHT
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +46,15 @@ public class TrackSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ()
-        {
-
-        }
         lastWayPoint = trackGenerator.waypointCount;
+        distanceTraintoEnd = Vector3.Distance(train.transform.position, trackGenerator.generatedWaypoints[lastWayPoint].position);
+        if ( distanceTraintoEnd < maxDistanceTraintoEnd ) 
+        {
+            MakeTrack(SortOfTrack.STRAIGHT);
+        }
+       
+        
+        
     }
 
     public void MakeTrack(SortOfTrack sortOfTrack)
@@ -57,7 +65,9 @@ public class TrackSpawner : MonoBehaviour
             case SortOfTrack.STRAIGHT:
                 {
 
-                    Instantiate(straightPrefab, spawnPointNewTrack, Quaternion.identity);
+                    var newStraight = Instantiate(straightPrefab, spawnPointNewTrack, Quaternion.identity);
+                    newStraight.transform.parent = track.transform;
+                    //TrackGenerator.GenerateTrack();
 
                     break;
                 }
@@ -73,5 +83,12 @@ public class TrackSpawner : MonoBehaviour
                 }
 
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, maxDistanceTraintoEnd);
+
     }
 }
