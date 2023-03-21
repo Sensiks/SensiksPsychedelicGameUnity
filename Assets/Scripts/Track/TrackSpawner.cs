@@ -6,27 +6,26 @@ using Cinemachine;
 public class TrackSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject straightPrefab, shortStraightPrefab, leftTurnPrefab, rightTurnPrefab;
+    private GameObject straightPrefab;
 
     [SerializeField]
-    private GameObject startingTrack, train;
+    private GameObject startingTrack, train, track;
 
+    [SerializeField]
     private TrackGenerator trackGenerator;
-    private GameObject track;
+
+    [SerializeField]
+    private float maxDistanceTraintoEnd, distanceTraintoEnd;
+
+    [SerializeField]
+    private CinemachinePath trackPath;
+
+    [HideInInspector]
+    public List<GameObject> Trackpieces;
 
     private Vector3 spawnPointNewTrack;
 
-    private int maxTrackAmount;
-
-    private int amountOfTrack;
-    private int trackInFrontTrain;
-    private int lastWayPoint;
-
-    private float distanceTraintoEnd;
-    [SerializeField]
-    private float maxDistanceTraintoEnd;
-
-    public List<GameObject> Trackpieces;
+    private int lastWayPointIdx;
     public enum SortOfTrack{
         STRAIGHT, LEFT, RIGHT
     }
@@ -34,55 +33,52 @@ public class TrackSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Trackpieces.Add(startingTrack);
-        
-
         straightPrefab.GetComponent<CinemachinePath>();
-        shortStraightPrefab.GetComponent<CinemachinePath>();
-        leftTurnPrefab.GetComponent<CinemachinePath>();
-        rightTurnPrefab.GetComponent<CinemachinePath>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        lastWayPoint = trackGenerator.waypointCount;
-        distanceTraintoEnd = Vector3.Distance(train.transform.position, trackGenerator.generatedWaypoints[lastWayPoint].position);
-        if ( distanceTraintoEnd < maxDistanceTraintoEnd ) 
+        
+        lastWayPointIdx = trackPath.m_Waypoints.Length -1;
+        distanceTraintoEnd = Vector3.Distance(train.transform.position, trackPath.m_Waypoints[lastWayPointIdx].position);
+
+        if (distanceTraintoEnd <= maxDistanceTraintoEnd) 
         {
             MakeTrack(SortOfTrack.STRAIGHT);
+
         }
-       
+
         
-        
+
+        trackGenerator.GenerateTrack();
+
     }
 
     public void MakeTrack(SortOfTrack sortOfTrack)
     {
-        spawnPointNewTrack = trackGenerator.generatedWaypoints[lastWayPoint].position;
+        spawnPointNewTrack = trackPath.m_Waypoints[lastWayPointIdx].position;
         switch (sortOfTrack)
         {
             case SortOfTrack.STRAIGHT:
                 {
+                    Debug.Log("Straight track");
+                    var newStraight = Instantiate(straightPrefab, track.transform);
+                    newStraight.transform.localPosition = spawnPointNewTrack;
+                    Trackpieces.Add(newStraight);
 
-                    var newStraight = Instantiate(straightPrefab, spawnPointNewTrack, Quaternion.identity);
-                    newStraight.transform.parent = track.transform;
-                    //TrackGenerator.GenerateTrack();
-
-                    break;
-                }
-
-            case SortOfTrack.LEFT:
-                {
                     break;
                 }
 
             default:
                 {
+                    Debug.Log("Default");
                     break;
                 }
 
         }
+
+        
     }
 
     void OnDrawGizmosSelected()

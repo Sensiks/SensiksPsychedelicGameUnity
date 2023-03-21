@@ -9,19 +9,30 @@ public class TrackGenerator : MonoBehaviour
     private CinemachinePath track;
     [SerializeField]
     private bool loopedTrack = false;
+    [SerializeField]
+    private GameObject startTrack;
 
     public CinemachinePath.Waypoint[] generatedWaypoints;
     public int waypointCount;
-    int currentWaypointIndex = 0;
+    public int currentWaypointIndex = 0;
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
-        
-    }
+        if(startTrack != null)
+        {
+            AddWaypoint(track.transform.GetChild(0), 0);
+        }
+    }*/
     /// <summary>
     /// Call when creating a new piece of a path. 
     /// Add new piece as a child to the of the it as a child to the track object.
     /// </summary>
+    /// 
+    private void Update()
+    {
+        //Debug.Log(waypointCount + "waypointcount");
+        //Debug.Log(generatedWaypoints.Length + "generatedwaypoints");
+    }
     public void GenerateTrack()
     {
         if (!track)
