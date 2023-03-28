@@ -9,7 +9,7 @@ public class TrackSpawner : MonoBehaviour
     private GameObject straightPrefab;
 
     [SerializeField]
-    private GameObject startingTrack, train, track;
+    private GameObject train, track;
 
     [SerializeField]
     private TrackGenerator trackGenerator;
@@ -20,39 +20,25 @@ public class TrackSpawner : MonoBehaviour
     [SerializeField]
     private CinemachinePath trackPath;
 
-    [HideInInspector]
-    public List<GameObject> Trackpieces;
-
     private Vector3 spawnPointNewTrack;
 
     private int lastWayPointIdx;
     public enum SortOfTrack{
         STRAIGHT, LEFT, RIGHT
     }
-
-    // Start is called before the first frame update
     void Start()
     {
         straightPrefab.GetComponent<CinemachinePath>();
     }
-
-    // Update is called once per frame
     void Update()
-    {
-        
+    {        
         lastWayPointIdx = trackPath.m_Waypoints.Length -1;
         distanceTraintoEnd = Vector3.Distance(train.transform.position, trackPath.m_Waypoints[lastWayPointIdx].position);
-
         if (distanceTraintoEnd <= maxDistanceTraintoEnd) 
         {
             MakeTrack(SortOfTrack.STRAIGHT);
-
+            trackGenerator.GenerateTrack();
         }
-
-        
-
-        trackGenerator.GenerateTrack();
-
     }
 
     public void MakeTrack(SortOfTrack sortOfTrack)
@@ -65,8 +51,6 @@ public class TrackSpawner : MonoBehaviour
                     Debug.Log("Straight track");
                     var newStraight = Instantiate(straightPrefab, track.transform);
                     newStraight.transform.localPosition = spawnPointNewTrack;
-                    Trackpieces.Add(newStraight);
-
                     break;
                 }
 
@@ -75,12 +59,8 @@ public class TrackSpawner : MonoBehaviour
                     Debug.Log("Default");
                     break;
                 }
-
-        }
-
-        
+        }        
     }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;

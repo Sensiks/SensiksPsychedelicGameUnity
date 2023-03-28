@@ -11,6 +11,7 @@ public class LineConductor : MonoBehaviour
     void Start()
     {
         line = this.gameObject.GetComponent<LineRenderer>();
+        line.positionCount = _objs.Length;
     }
 
     // Update is called once per frame
