@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Coal
   - PullMechanism
+  - Shovel
+  - CoalsInCart
   layers:
   - Default
   - TransparentFX
