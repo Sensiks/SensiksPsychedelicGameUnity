@@ -5,13 +5,13 @@ using UnityEngine;
 public class MentorDialogueSystem : MonoBehaviour
 {
     public AudioSource source1;
+    [SerializeField]
     private List<AudioClip> currentAudioClips;
     private int audioIndex = 0;
 
+    [Header("Event 1")]
     public List<AudioClip> event1Audioclips;
 
-    [Header("GameEvent")]
-    public GameEvent NextEvent;
 
     private void Start()
     {
@@ -28,7 +28,12 @@ public class MentorDialogueSystem : MonoBehaviour
         }
     }
 
-    public void UpdateAudioClips()
+    public void Update()
+    {
+        switch(EventManager)
+    }
+
+    public void UpdateAudioClips(List<AudioSource> audioClipsToTranfer)
     {
         currentAudioClips.Clear();
         foreach(AudioClip clipToTranfer in event1Audioclips)
@@ -36,6 +41,6 @@ public class MentorDialogueSystem : MonoBehaviour
             currentAudioClips.Add(clipToTranfer);
         }
     }
-    
+
 
 }

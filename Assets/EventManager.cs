@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //public Transform NextObjectiveMentor;
+    //public List<AudioClip> audioClips;
+
+    [Header("Event1")]
+    public Transform checkpointEvent1;
+
+    public UnityEvent Event1;
+    public enum Event
     {
-        
+        DEFAULT, EVENT1, EVENT2, EVENT3
     }
 
-    // Update is called once per frame
-    void Update()
+    public Event currentEvent;
+
+    //public Event currentEvent = Event.DEFAULT;
+    public void Start()
     {
         
+        Event1.Invoke();
+    }
+    private void Update()
+    {
+
     }
 }
