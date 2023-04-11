@@ -18,10 +18,7 @@ public class FurnaceTrigger : MonoBehaviour
     [SerializeField]
     private CoalOnShovel coalOnShovel;
 
-    private void Start()
-    {
-        
-    }
+    public GameEvent onPressureChange;
 
     void OnTriggerEnter(Collider other)
     {
@@ -29,7 +26,7 @@ public class FurnaceTrigger : MonoBehaviour
         {
             Debug.Log("Coal in fire");
             furnaceManager.FireOn();
-            pressureManager.PressureUp(pressureFromCoal);
+            onPressureChange.Raise(this, 30);
             Destroy(other);
             coalOnShovel.ShovelSwitch(false);
             //SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);

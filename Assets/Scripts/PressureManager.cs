@@ -12,6 +12,9 @@ public class PressureManager : MonoBehaviour
     [SerializeField]
     private Image mask;
 
+    [Header("Events")]
+    public GameEvent onPressureChange;
+
     public void Update()
     {
         GetCurrentFill();
@@ -20,40 +23,25 @@ public class PressureManager : MonoBehaviour
     public void FixedUpdate()
     {
         //currentPressure -= pressureDecreasePerSecond * Time.deltaTime;
-        PressureDown(0.02f);
+        PressureChange(-0.02f);
     }
 
-    public void PressureUp(float amount)
+    public void PressureChange(float amount)
     {
-        Debug.Log("current pressure: " + amount);
-        
-        if(currentPressure + amount > maxPressure)
+        if (currentPressure + amount > maxPressure)
         {
             currentPressure = maxPressure;
         }
-        else
-        {
-            currentPressure += amount;
-        }
-    }
-
-    public void PressureDown(float amount)
-    {
-        if(currentPressure - amount < minPressure)
+        else if (currentPressure - amount < minPressure)
         {
             currentPressure = minPressure;
         }
         else
         {
-            currentPressure -= amount;
+            currentPressure += amount;
         }
-        
-
-        
+        onPressureChange.Raise(this, currentPressure);
     }
-
-    
-
     void GetCurrentFill()
     {
         float fillAmount = currentPressure / maxPressure;
