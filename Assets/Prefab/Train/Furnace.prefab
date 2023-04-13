@@ -9231,6 +9231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furnaceManager: {fileID: 1807816176891238574}
+  pressureManager: {fileID: 0}
+  pressureFromCoal: 0
+  coalOnShovel: {fileID: 0}
+  onPressureChange: {fileID: 0}
 --- !u!1001 &1501722263799776189
 PrefabInstance:
   m_ObjectHideFlags: 0

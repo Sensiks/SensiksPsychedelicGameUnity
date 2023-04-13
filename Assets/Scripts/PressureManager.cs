@@ -6,26 +6,46 @@ using Sensiks.SDK.Shared.SensiksDataTypes;
 
 public class PressureManager : MonoBehaviour
 {
+    [Header("Pressure Management")]
     [SerializeField]
-    private float minPressure, maxPressure, currentPressure, pressureDecreasePerSecond;
-
+    private Image currentPressureMask;
     [SerializeField]
-    private Image mask;
+    private float minPressure;
+    [SerializeField]
+    private float maxPressure;
+    [SerializeField]
+    private float currentPressure;
+    [SerializeField]
+    private float pressureDecreasePerSecond;
 
-    [Header("Events")]
-    public GameEvent onPressureChange;
+    [Header("Pressure Goal")]
+    [SerializeField]
+    private Image goalPressureMask;
+    [SerializeField]
+    private float goalSize;
+    private bool isInGoal;
+    private float goalValue;
+    private int numberOfGoals;
+    public bool goalisActive;
 
-    public void Update()
+
+
+    private void Start()
     {
-        GetCurrentFill();
+        SpawnGoal();
     }
 
     public void FixedUpdate()
     {
-        //currentPressure -= pressureDecreasePerSecond * Time.deltaTime;
-        PressureChange(-0.02f);
+        PressureChange(pressureDecreasePerSecond * Time.deltaTime);
+        GetCurrentPressureFill();
+        if (currentPressure >= goalValue - goalSize && currentPressure <= goalValue + goalSize)
+        {
+            PressureInGoal();
+        }
     }
 
+    //Manage the current pressure
     public void PressureChange(float amount)
     {
         if (currentPressure + amount > maxPressure)
@@ -39,12 +59,35 @@ public class PressureManager : MonoBehaviour
         else
         {
             currentPressure += amount;
-        }
-        onPressureChange.Raise(this, currentPressure);
+        } 
     }
-    void GetCurrentFill()
+
+    //Spawn a pressure goal
+    private void SpawnGoal()
+    {
+        if (goalisActive == true)
+        {
+            //goalPressureMask.transform.position.x = goalValue / 100;
+        }
+        goalValue = 30;
+        
+        //goalValue = Random.Range(minPressure + goalSize/2, maxPressure - goalSize/2);
+    }
+
+    private void PressureInGoal()
+    {
+        numberOfGoals++;
+
+    }
+
+    void GetCurrentPressureFill()
     {
         float fillAmount = currentPressure / maxPressure;
-        mask.fillAmount = fillAmount;
+        currentPressureMask.fillAmount = fillAmount;
+    }
+
+    void GetGoalPressureFill()
+    {
+        
     }
 }

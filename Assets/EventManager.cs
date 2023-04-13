@@ -12,18 +12,19 @@ public class EventManager : MonoBehaviour
     public Transform checkpointEvent1;
 
     public UnityEvent Event1;
-    public enum Event
+    
+    
+    public enum CurrentEvent
     {
         DEFAULT, EVENT1, EVENT2, EVENT3
     }
 
-    public Event currentEvent;
 
     //public Event currentEvent = Event.DEFAULT;
     public void Start()
     {
-        
         Event1.Invoke();
+        
     }
     private void Update()
     {

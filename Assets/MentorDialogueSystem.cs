@@ -8,10 +8,14 @@ public class MentorDialogueSystem : MonoBehaviour
     [SerializeField]
     private List<AudioClip> currentAudioClips;
     private int audioIndex = 0;
+    public EventManager eventManager;
+
 
     [Header("Event 1")]
     public List<AudioClip> event1Audioclips;
 
+    [Header("Event 2")]
+    public List<AudioClip> event2Audioclips;
 
     private void Start()
     {
@@ -28,19 +32,32 @@ public class MentorDialogueSystem : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        switch(EventManager)
-    }
-
-    public void UpdateAudioClips(List<AudioSource> audioClipsToTranfer)
+    public void UpdateAudioClips(List<AudioClip> audioClipsToTranfer)
     {
         currentAudioClips.Clear();
-        foreach(AudioClip clipToTranfer in event1Audioclips)
+        foreach(AudioClip clipToTranfer in audioClipsToTranfer)
         {
             currentAudioClips.Add(clipToTranfer);
         }
     }
+
+    public void CheckCurrentEvent(EventManager.CurrentEvent currentEvent)
+    {
+        switch (currentEvent) 
+        {
+            case (EventManager.CurrentEvent.EVENT1):
+                UpdateAudioClips(event1Audioclips);
+                break;
+
+            case (EventManager.CurrentEvent.EVENT2):
+                UpdateAudioClips(event2Audioclips);
+                break;
+            
+        
+        }
+
+    }
+
 
 
 }
