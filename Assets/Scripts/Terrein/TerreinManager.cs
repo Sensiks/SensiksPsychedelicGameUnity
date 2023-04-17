@@ -5,11 +5,8 @@ using UnityEngine;
 public class TerreinManager : MonoBehaviour
 {
 
-    private CurrentQuarter currentQuater;
-    public enum CurrentQuarter
-    {
-        FIRSTQUARTER, SECONDQUATER, THIRTQUARTER, FOURTHQUARTER;
-    }
+
+    
 
     public void Start()
     {
@@ -23,6 +20,7 @@ public class TerreinManager : MonoBehaviour
 
     public void ChangeActiveTerrein()
     {
+
 
     }
 }

@@ -25,6 +25,7 @@ public class EventManager : MonoBehaviour
     {
         Event1.Invoke();
         
+        
     }
     private void Update()
     {
