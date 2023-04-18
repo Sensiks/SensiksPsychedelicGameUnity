@@ -9,9 +9,10 @@ public class EventManager : MonoBehaviour
     //public List<AudioClip> audioClips;
 
     [Header("Event1")]
-    public Transform checkpointEvent1;
+    public UnityEvent event1;
 
-    public UnityEvent Event1;
+    [Header("Event2")]
+    public UnityEvent event2;
     
     
     public enum CurrentEvent
@@ -23,11 +24,16 @@ public class EventManager : MonoBehaviour
     //public Event currentEvent = Event.DEFAULT;
     public void Start()
     {
-        Event1.Invoke();
+        event1.Invoke();
         
         
     }
     private void Update()
+    {
+
+    }
+
+    private void CheckActiveEvent()
     {
 
     }

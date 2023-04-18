@@ -6,13 +6,23 @@ public class ChangeTerrein : MonoBehaviour
 {
     private MeshRenderer myMeshrenderer;
     public CurrentQuarter currentQuarter;
-
     private EventManager eventManager;
-    private int amountOfQuaters;
+    public bool event1Active;
+    
+    [SerializeField]
+    private int quaterIndx;
     private int amountOfRounds;
+    private int oppositequarterindx = 2;
+    private int changedTerrains;
+
+    [SerializeField]
+    private List<Terrain> forrestTerrains;
+    [SerializeField]
+    private List<Terrain> beachTerrains;
+
     public enum CurrentQuarter
     {
-        FIRSTQUARTER, SECONDQUATER, THIRTQUARTER, FOURTHQUARTER;
+        FIRSTQUARTER, SECONDQUATER, THIRTQUARTER, FOURTHQUARTER
     }
 
     private void Start()
@@ -22,26 +32,37 @@ public class ChangeTerrein : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Train"))
+        if (other.transform.tag == "Player")
         {
+            Debug.Log("ChangeTerrain");
+            quaterIndx++;
+            SwitchCurrentQuarter();
+            ChangeTerrainToOcean();
+        }
+    }
+
+    private void ChangeTerrainToOcean()
+    {
+        if(event1Active == true)
+        {
+            Vector3 locationNewTerrain;
+            locationNewTerrain = forrestTerrains[quaterIndx + oppositequarterindx + 1].GetPosition();
+            forrestTerrains[quaterIndx + oppositequarterindx + 1].enabled = false;
             
-            amountOfQuaters++;
-            UpdateCurrentQuarter();
-           
+            beachTerrains[changedTerrains].enabled = true;
+            beachTerrains[changedTerrains].transform.position = locationNewTerrain;
+            changedTerrains++;
+
+            if (changedTerrains >= beachTerrains.Count)
+            {
+                changedTerrains = 0;
+            }
         }
     }
 
-    private void ChangeTerreinQuarter()
+    private void SwitchCurrentQuarter()
     {
-        if (eventManager.Event1 != null && eventManager.Event1.GetPersistentEventCount() > 0)
-        {
-
-        }
-    }
-
-    private void UpdateCurrentQuarter()
-    {
-         switch (amountOfQuaters)
+         switch (quaterIndx)
             {
                 case (1):
                     currentQuarter = CurrentQuarter.FIRSTQUARTER;
@@ -53,7 +74,8 @@ public class ChangeTerrein : MonoBehaviour
                     currentQuarter = CurrentQuarter.THIRTQUARTER;
                     break;
                 case (4):
-                    amountOfQuaters = 0;
+                    quaterIndx = 0;
+                    amountOfRounds++;
                     currentQuarter = CurrentQuarter.FOURTHQUARTER;
                     break;
 
