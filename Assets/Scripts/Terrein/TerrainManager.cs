@@ -8,6 +8,7 @@ public class TerrainManager : MonoBehaviour
     public List<GameObject> forrestTerrains;
     [SerializeField]
     public List<GameObject> beachTerrains;
+    public int quarterIndx, changedTerrains;
 
 
 }
