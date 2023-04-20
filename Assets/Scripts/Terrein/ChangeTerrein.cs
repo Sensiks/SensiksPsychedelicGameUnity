@@ -4,84 +4,62 @@ using UnityEngine;
 
 public class ChangeTerrein : MonoBehaviour
 {
-    private MeshRenderer myMeshrenderer;
-    public CurrentQuarter currentQuarter;
     private EventManager eventManager;
+    
+    [SerializeField]
+    private TerrainManager terrainManager;
     public bool event1Active;
     
     [SerializeField]
-    private int quaterIndx;
-    private int amountOfRounds;
-    private int oppositequarterindx = 2;
-    private int changedTerrains;
-
-    [SerializeField]
-    private List<Terrain> forrestTerrains;
-    [SerializeField]
-    private List<Terrain> beachTerrains;
-
-    public enum CurrentQuarter
-    {
-        FIRSTQUARTER, SECONDQUATER, THIRTQUARTER, FOURTHQUARTER
-    }
-
-    private void Start()
-    {
-        myMeshrenderer = GetComponent<MeshRenderer>();
-    }
-
+    private int quarterIndx, amountOfRounds, changedTerrains;
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Player")
         {
             Debug.Log("ChangeTerrain");
-            quaterIndx++;
-            SwitchCurrentQuarter();
-            ChangeTerrainToOcean();
+            SelectTerrain();
         }
     }
 
-    private void ChangeTerrainToOcean()
+    private void SelectTerrain()
     {
-        if(event1Active == true)
+        switch (quarterIndx)
         {
-            Vector3 locationNewTerrain;
-            locationNewTerrain = forrestTerrains[quaterIndx + oppositequarterindx + 1].GetPosition();
-            forrestTerrains[quaterIndx + oppositequarterindx + 1].enabled = false;
-            
-            beachTerrains[changedTerrains].enabled = true;
-            beachTerrains[changedTerrains].transform.position = locationNewTerrain;
-            changedTerrains++;
+            //Check what quater is the opposite quater
+            case 0:
+            case 1:
+                ChangeTerrainToOcean(quarterIndx +2);
+                break; 
+            case 2:
+            case 3:
+                ChangeTerrainToOcean(quarterIndx -2);
+                break;
+        }
+    }
 
-            if (changedTerrains >= beachTerrains.Count)
+    private void ChangeTerrainToOcean(int selectedTerrein)
+    {
+
+        if (event1Active == true && changedTerrains <= terrainManager.beachTerrains.Count)
+        {
+            changedTerrains++;
+            quarterIndx++;
+            Debug.Log("changedTerrains " + changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
+            Debug.Log("quarterIndx: " + quarterIndx);
+            //set the location of new terrein
+            Vector3 locationNewTerrain;
+            locationNewTerrain = terrainManager.forrestTerrains[selectedTerrein].transform.position;
+            terrainManager.forrestTerrains[selectedTerrein].SetActive(false);
+
+            //turn on the the new terrain.
+            terrainManager.beachTerrains[changedTerrains].SetActive(true);
+            terrainManager.beachTerrains[changedTerrains].transform.position = locationNewTerrain;
+
+            //reset changedTerrains
+            if (changedTerrains > terrainManager.beachTerrains.Count)
             {
                 changedTerrains = 0;
             }
         }
     }
-
-    private void SwitchCurrentQuarter()
-    {
-         switch (quaterIndx)
-            {
-                case (1):
-                    currentQuarter = CurrentQuarter.FIRSTQUARTER;
-                    break;
-                case (2):
-                    currentQuarter = CurrentQuarter.SECONDQUATER;
-                    break;
-                case (3):
-                    currentQuarter = CurrentQuarter.THIRTQUARTER;
-                    break;
-                case (4):
-                    quaterIndx = 0;
-                    amountOfRounds++;
-                    currentQuarter = CurrentQuarter.FOURTHQUARTER;
-                    break;
-
-            }
-    }
-
-
-
 }
