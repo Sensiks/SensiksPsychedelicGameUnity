@@ -6,8 +6,11 @@ using UnityEditor;
 public class ChangeTerrein : MonoBehaviour
 {
     private EventManager eventManager;
+    [SerializeField]
     private RotateScript rotate;
-    
+
+    public Terrain terrainToBeRoteted;
+
     [SerializeField]
     private TerrainManager terrainManager;
     public bool event1Active;
@@ -26,6 +29,7 @@ public class ChangeTerrein : MonoBehaviour
     
     private void SelectTerrain()
     {
+        terrainToBeRoteted = terrainManager.beachTerrains[terrainManager.changedTerrains].GetComponent<Terrain>();
         switch (terrainManager.quarterIndx)
         {
             //Check what quater is the opposite quater
@@ -40,6 +44,12 @@ public class ChangeTerrein : MonoBehaviour
         }
         terrainManager.changedTerrains++;
         terrainManager.quarterIndx++;
+
+        if (terrainManager.quarterIndx > 3)
+        {
+            terrainManager.quarterIndx = 0;
+        }
+
     }
 
     private void ChangeTerrainToOcean(int selectedTerrein)
@@ -51,17 +61,38 @@ public class ChangeTerrein : MonoBehaviour
             Debug.Log("changedTerrains " + terrainManager.changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
             Debug.Log("quarterIndx: " + terrainManager.quarterIndx);
             
-            //set the location of new terrein
+            //get the location of new terrain
             Vector3 locationNewTerrain;
             locationNewTerrain = terrainManager.forrestTerrains[selectedTerrein].transform.position;
+
+            //turn off old terrain
             terrainManager.forrestTerrains[selectedTerrein].SetActive(false);
 
             //turn on the the new terrain.
             terrainManager.beachTerrains[terrainManager.changedTerrains].SetActive(true);
+
+            //set the position of the new terrain.
             terrainManager.beachTerrains[terrainManager.changedTerrains].transform.position = locationNewTerrain;
 
             //Rotate the terrein to its right position (has to be done like this terrein can't be rotated via the transform)
-            rotateTerreinRightDirection();
+            switch (terrainManager.quarterIndx)
+            {
+                case (0):
+                    rotateTerreinRightDirection();
+                    rotateTerreinRightDirection();
+
+                    break;
+                case (1):
+                    rotateTerreinRightDirection();
+                    break;
+                case (2):
+                    rotateTerreinRightDirection();
+                    break;
+                case (3):
+                    rotateTerreinRightDirection();
+                    break;
+
+            }
 
             //reset changedTerrains
             if (terrainManager.changedTerrains > terrainManager.beachTerrains.Count)
@@ -73,8 +104,9 @@ public class ChangeTerrein : MonoBehaviour
 
     private void rotateTerreinRightDirection()
     {
-        //look for terrain component !!still needs to be saved
+        //Look for terrain component !!still needs to be saved
+         
 
-        rotate.RotateTerrain(terrainManager.beachTerrains[terrainManager.changedTerrains].GetComponent<Terrain>());
+        rotate.RotateTerrain(terrainToBeRoteted);
     }
 }
