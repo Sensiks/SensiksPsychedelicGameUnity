@@ -6,12 +6,14 @@ using Sensiks.SDK.Shared.SensiksDataTypes;
 
 public class FurnaceTrigger : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
     private FurnaceManager furnaceManager;
 
     [SerializeField]
-    private PressureManager pressureManager;
+    private PressureMinigame pressureMinigame;
 
+    [Header("Settings")]
     [SerializeField]
     private float pressureFromCoal;
 
@@ -26,12 +28,13 @@ public class FurnaceTrigger : MonoBehaviour
         {
             Debug.Log("Coal in fire");
             furnaceManager.FireOn();
-            onPressureChange.Raise(this, 30);
-            Destroy(other);
+            
             coalOnShovel.ShovelSwitch(false);
             //SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);
             //SensiksManager.SetActiveScent(Scent.SMOKE, 0.1f);
-            
+            //onPressureChange.Raise(this, 30);
+            //Destroy(other);
+
         }
     }
 }

@@ -8,25 +8,40 @@ public class EventManager : MonoBehaviour
     //public Transform NextObjectiveMentor;
     //public List<AudioClip> audioClips;
 
+    [Header("StarterEvent")]
+    [SerializeField] public UnityEvent starterEvent;
+    public bool starteventInvoked;
+
     [Header("Event1")]
-    public UnityEvent event1;
+    [SerializeField] public UnityEvent event1;
+    public bool event1Invoked;
 
     [Header("Event2")]
-    public UnityEvent event2;
-    
-    
-    public enum CurrentEvent
+    [SerializeField] public UnityEvent event2;
+    public bool event2Invoked;
+
+
+    private void OnEnable()
     {
-        DEFAULT, EVENT1, EVENT2, EVENT3
+        
     }
-
-
+    //private void OnDisable()
+    //{
+    //    Debug.Log("OnDisable EventManager");
+    //    starterEvent.RemoveAllListeners();
+    //    event1.RemoveAllListeners();
+    //    event2.RemoveAllListeners();
+    //}
     //public Event currentEvent = Event.DEFAULT;
-    public void Start()
+    public void Awake()
     {
-        event1.Invoke();
-        
-        
+
+        starterEvent.AddListener(() => starteventInvoked = true);
+        event1.AddListener(() => event1Invoked = true);
+        event2.AddListener(() => event1Invoked = true);
+        starterEvent.Invoke();
+
+
     }
     private void Update()
     {

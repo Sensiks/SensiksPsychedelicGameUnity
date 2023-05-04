@@ -5,7 +5,7 @@ using UnityEngine;
 public class MentorManager : MonoBehaviour
 { 
     public MentorDialogueSystem mentorDialogueSystem;
-    
+    public GameObject mentor;
     public float travelDuration;
     private float currentTime = 0f;
 
@@ -13,7 +13,6 @@ public class MentorManager : MonoBehaviour
     {
         StartCoroutine(MoveObject(nextCheckpoint));
     }
-
 
     IEnumerator MoveObject(Transform nextCheckpoint)
     {
