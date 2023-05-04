@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PressureMinigame : MonoBehaviour
 {
@@ -11,18 +12,16 @@ public class PressureMinigame : MonoBehaviour
     private Transform topPivot;
     [SerializeField]
     private Transform bottemPivot;
-    [SerializeField]private GameObject goalObject;
-    [SerializeField]private GameObject fireObject;
+    [SerializeField] private Image goalImage;
+    [SerializeField] private Image fireImage;
 
 
     [Header("Goal settings")]
     [SerializeField] private Transform goal;
-    private float goalPosition, cursurGoal, goalTimer;
+    [SerializeField] private float goalPosition, cursurGoal, goalTimer;
     [SerializeField] private float goalTimerMultiplier = 3f;
-    private float goalSpeed;
+    [SerializeField] private float goalSpeed;
     [SerializeField] private float smoothMotion = 1f;
-    
-
 
     [Header("Fire settings")]
     [SerializeField] Transform fire;
@@ -37,9 +36,29 @@ public class PressureMinigame : MonoBehaviour
     [Header("Progress Bar")]
     private float hookProgress;
     
+
+    [Header("StateMachine")]
+    public CurrentMinigameStates minigamestates;
+    public enum CurrentMinigameStates
+    {
+        TUTORIAL, OFF, ON
+    }
+    
+    
     //TODO:
     //Resize goal
     //
+
+    public void StateMachine()
+    {
+        switch (minigamestates)
+        {
+            case CurrentMinigameStates.OFF:
+                firePower = 0f;
+
+                break;
+        }
+    }
 
     public void Update()
     {
@@ -51,19 +70,20 @@ public class PressureMinigame : MonoBehaviour
         
     }
 
+
     public void ActivateMinigame(bool activateMinigame)
     {
         if (activateMinigame)
         {
-            goalObject.SetActive(true);
-            fireObject.SetActive(true);
+            goalImage.enabled = true;
+            fireImage.enabled = true;
             minigameActive = true;
 
         }
         else if (!activateMinigame)
         {
-            goalObject.SetActive(false);
-            fireObject.SetActive(false);
+            goalImage.enabled = false;
+            fireImage.enabled = false;
             minigameActive = false;
         }
     }
