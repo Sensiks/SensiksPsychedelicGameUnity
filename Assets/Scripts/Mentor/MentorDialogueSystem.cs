@@ -21,7 +21,7 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> event2Audioclips;
 
     //step 1: Listen to for an event
-    private void Awake()
+    private void Start()
     {
         //mentorAudioSource = GetComponent<AudioSource>();
         eventManager.starterEvent.AddListener(NewAudioClipList);
@@ -31,6 +31,7 @@ public class MentorDialogueSystem : MonoBehaviour
     private void NewAudioClipList()
     {
         Debug.Log("in new audiocliplist");
+        Debug.Log(eventManager.starteventInvoked);
         if (eventManager.starteventInvoked == true)
         {
             Debug.Log("new audio clip list start event");
@@ -65,6 +66,7 @@ public class MentorDialogueSystem : MonoBehaviour
     public void NextAudioClip()
     {
         Debug.Log("in NextAudioClip");
+        Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
         if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
         {
             Debug.Log("currentAudioclips: " + currentAudioClips.Count);

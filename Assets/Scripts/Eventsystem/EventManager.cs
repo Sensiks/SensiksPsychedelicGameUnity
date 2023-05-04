@@ -35,13 +35,14 @@ public class EventManager : MonoBehaviour
     //public Event currentEvent = Event.DEFAULT;
     public void Awake()
     {
-
-        starterEvent.AddListener(() => starteventInvoked = true);
+        starterEvent.AddListener(() => this.starteventInvoked = true);
         event1.AddListener(() => event1Invoked = true);
         event2.AddListener(() => event1Invoked = true);
+    }
+
+    public void Start()
+    {
         starterEvent.Invoke();
-
-
     }
     private void Update()
     {
