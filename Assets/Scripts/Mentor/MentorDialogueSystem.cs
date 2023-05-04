@@ -9,10 +9,10 @@ public class MentorDialogueSystem : MonoBehaviour
     private int audioIndex = 0;
     public EventManager eventManager;
     
-    private List<AudioClip> currentAudioClips;
+    public List<AudioClip> currentAudioClips;
 
     [Header("StarterEvent Audioclips")]
-    public List<AudioClip> starteventAudioclips;
+    public List<AudioClip> startEventAudioclips;
 
     [Header("Event 1 Audioclips")]
     public List<AudioClip> event1Audioclips;
@@ -21,7 +21,7 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> event2Audioclips;
 
     //step 1: Listen to for an event
-    private void Start()
+    private void Awake()
     {
         //mentorAudioSource = GetComponent<AudioSource>();
         eventManager.starterEvent.AddListener(NewAudioClipList);
@@ -34,16 +34,16 @@ public class MentorDialogueSystem : MonoBehaviour
         if (eventManager.starteventInvoked == true)
         {
             Debug.Log("new audio clip list start event");
-            Debug.Log(starteventAudioclips);
-            UpdateAudioClips(starteventAudioclips);
+            Debug.Log(startEventAudioclips);
+            UpdateAudioClips(startEventAudioclips);
         }
         else if (eventManager.event1Invoked == true)
         {
-            UpdateAudioClips(starteventAudioclips);
+            UpdateAudioClips(event1Audioclips);
         }
         else if (eventManager.event2Invoked == true)
         {
-            UpdateAudioClips(starteventAudioclips);
+            UpdateAudioClips(event2Audioclips);
         }
     }
 
@@ -55,14 +55,19 @@ public class MentorDialogueSystem : MonoBehaviour
         {
             currentAudioClips.Add(clipToTranfer);
         }
+
+        Debug.Log("Update Audio Clips " + currentAudioClips[1]);
+
         NextAudioClip();
     }
 
     //step 4: Play the audio clips
     public void NextAudioClip()
     {
+        Debug.Log("in NextAudioClip");
         if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
         {
+            Debug.Log("currentAudioclips: " + currentAudioClips.Count);
             mentorAudioSource.clip = currentAudioClips[audioIndex];
             mentorAudioSource.Play();
             audioIndex++;

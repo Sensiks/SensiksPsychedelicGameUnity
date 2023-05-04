@@ -58,8 +58,8 @@ public class ChangeTerrein : MonoBehaviour
         if (event1Active == true && terrainManager.changedTerrains <= terrainManager.beachTerrains.Count)
         {
             
-            Debug.Log("changedTerrains " + terrainManager.changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
-            Debug.Log("quarterIndx: " + terrainManager.quarterIndx);
+            //Debug.Log("changedTerrains " + terrainManager.changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
+            //Debug.Log("quarterIndx: " + terrainManager.quarterIndx);
             
             //get the location of new terrain
             Vector3 locationNewTerrain;
