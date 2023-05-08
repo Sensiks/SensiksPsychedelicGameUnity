@@ -12,8 +12,8 @@ public class PressureMinigame : MonoBehaviour
     private Transform topPivot;
     [SerializeField]
     private Transform bottemPivot;
-    [SerializeField]private GameObject goalObject;
-    [SerializeField]private GameObject fireObject;
+    [SerializeField] private GameObject goalObject;
+    [SerializeField] private GameObject fireObject;
 
 
     [Header("Goal settings")]
@@ -23,14 +23,14 @@ public class PressureMinigame : MonoBehaviour
     private float goalSpeed;
     [SerializeField] private float smoothMotion = 1f;
     [SerializeField] private float goalSize;
-    
+
 
 
     [Header("Fire settings")]
     [SerializeField] Transform fire;
     [SerializeField] private float firePosition;
     [SerializeField] float fireSize;
-    
+
     [SerializeField] private float firePullVelocity;
     [SerializeField] private float fireInscreasePower = 0.0001f;
     [SerializeField] private float fireNaturalDecreasePower = 0.00003f;
@@ -41,7 +41,14 @@ public class PressureMinigame : MonoBehaviour
     private float progressAmount;
     [SerializeField] float progressBarIncrease;
     [SerializeField] float progressBarDegredasion;
+
+    [Header("StateMachine")]
+    public MinigameState miniGameState;
+    private MinigameState lastMiniGameState;
+    public enum MinigameState
+        {DEFAULT = 0, ON = 1, OFF = 2, TUTORIAL = 3}
     
+
     //TODO:
     //Resize goal, be able to win
     //
@@ -53,15 +60,52 @@ public class PressureMinigame : MonoBehaviour
 
     public void Update()
     {
+        UpdateGameState();
 
-        //Make stateMachine here
-        if (minigameActive)
+    }
+
+    /// <summary>
+    /// Updates and triggers the minigame state;
+    /// 0 == Tutorial
+    /// 1 == ON
+    /// 2 == OFF
+    /// 3 == DEFEALT
+    /// </summary>
+    /// <param name="newState"></param>
+    public void UpdateGameState(int newState = 0)
+    {
+        if(newState == 0)
         {
-            GoalMover();
-            PressureChanger();
-            ProgressCheck();
+            newState = (int)lastMiniGameState;
         }
+        switch ((MinigameState)newState)
+        {
+            case MinigameState.ON:
+                ActivateMinigame(true);
+                PressureChanger();
+                ProgressCheck();
+                lastMiniGameState = MinigameState.ON;
+                Debug.Log("on state");
+                break;
 
+            case MinigameState.OFF:
+                ActivateMinigame(false);
+                lastMiniGameState = MinigameState.OFF;
+                Debug.Log("off state");
+                break;
+
+            case MinigameState.TUTORIAL:
+                ActivateMinigame(true);
+                ProgressCheck();
+                lastMiniGameState = MinigameState.TUTORIAL;
+                Debug.Log("tutorial state");
+                break;
+
+            case MinigameState.DEFAULT:
+                Debug.Log("default state ");
+                break;
+
+        }
     }
 
     public void ProgressCheck()
@@ -117,19 +161,9 @@ public class PressureMinigame : MonoBehaviour
 
     public void ActivateMinigame(bool activateMinigame)
     {
-        if (activateMinigame)
-        {
-            goalObject.GetComponent<Image>().CrossFadeAlpha(255, 0.1f, true);
-            fireObject.GetComponent<Image>().CrossFadeAlpha(255, 0.1f, true);
-            minigameActive = true;
-
-        }
-        else if (!activateMinigame)
-        {
-            goalObject.GetComponent<Image>().CrossFadeAlpha(0, 0.1f, true);
-            fireObject.GetComponent<Image>().CrossFadeAlpha(0, 0.1f, true); ;
-            minigameActive = false;
-        }
+        goalObject.GetComponent<Image>().enabled = activateMinigame;
+        fireObject.GetComponent<Image>().enabled = activateMinigame;
+        minigameActive = activateMinigame;
     }
 
     public void PressureChanger(float increasePower = 0)
@@ -150,14 +184,22 @@ public class PressureMinigame : MonoBehaviour
     {
         RectTransform rt = (RectTransform)goalObject.transform;
         float currentWidth = rt.rect.width;
-
-        goalTimer -= Time.deltaTime;
-        if (goalTimer <= 0f)
+        
+        if(miniGameState == MinigameState.TUTORIAL)
         {
-            goalTimer = Random.value * goalTimerMultiplier;
-
-            cursurGoal = Random.value;
+            goalPosition = 0.5f;
         }
+        else if (miniGameState == MinigameState.ON)
+        {
+            goalTimer -= Time.deltaTime;
+            if (goalTimer <= 0f)
+            {
+                goalTimer = Random.value * goalTimerMultiplier;
+
+                cursurGoal = Random.value;
+            }
+        }
+        
 
         goalPosition = Mathf.Clamp(goalPosition, currentWidth / 2, 1 - currentWidth / 2);
         goalPosition = Mathf.SmoothDamp(goalPosition, cursurGoal, ref goalSpeed, smoothMotion);
