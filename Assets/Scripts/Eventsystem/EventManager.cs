@@ -42,6 +42,7 @@ public class EventManager : MonoBehaviour
 
     public void Start()
     {
+
         starterEvent.Invoke();
     }
     private void Update()
