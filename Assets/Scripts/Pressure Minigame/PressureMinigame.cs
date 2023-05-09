@@ -30,17 +30,17 @@ public class PressureMinigame : MonoBehaviour
     [SerializeField] Transform fire;
     [SerializeField] private float firePosition;
     [SerializeField] float fireSize;
-
+    [SerializeField] private bool handleActive;
     [SerializeField] private float firePullVelocity;
     [SerializeField] private float fireInscreasePower = 0.0001f;
     [SerializeField] private float fireNaturalDecreasePower = 0.00003f;
-    [SerializeField] private float fireProgressDegradationPower = 0.1f;
 
     [Header("Progress Bar")]
     [SerializeField] Transform progressBarTransform;
     private float progressAmount;
     [SerializeField] float progressBarIncrease;
     [SerializeField] float progressBarDegredasion;
+    [SerializeField] int winAmounts;
 
     [Header("StateMachine")]
     public MinigameState miniGameState;
@@ -66,10 +66,10 @@ public class PressureMinigame : MonoBehaviour
 
     /// <summary>
     /// Updates and triggers the minigame state;
-    /// 0 == Tutorial
+    /// 0 == DEFAULT
     /// 1 == ON
     /// 2 == OFF
-    /// 3 == DEFEALT
+    /// 3 == TUTORIAL
     /// </summary>
     /// <param name="newState"></param>
     public void UpdateGameState(int newState = 0)
@@ -80,6 +80,10 @@ public class PressureMinigame : MonoBehaviour
         }
         switch ((MinigameState)newState)
         {
+            case MinigameState.DEFAULT:
+                Debug.Log("default state ");
+                break;
+
             case MinigameState.ON:
                 ActivateMinigame(true);
                 PressureChanger();
@@ -100,11 +104,6 @@ public class PressureMinigame : MonoBehaviour
                 lastMiniGameState = MinigameState.TUTORIAL;
                 Debug.Log("tutorial state");
                 break;
-
-            case MinigameState.DEFAULT:
-                Debug.Log("default state ");
-                break;
-
         }
     }
 
@@ -121,7 +120,7 @@ public class PressureMinigame : MonoBehaviour
         float min = goalPosition - currentWidth / 2;
         float max = goalPosition + currentWidth / 2;
 
-        Debug.Log("min: " + min + "max: " + max);
+        //Debug.Log("min: " + min + "max: " + max);
         if (min < firePosition && firePosition < max)
         {
             Debug.Log("Increase");
@@ -137,7 +136,8 @@ public class PressureMinigame : MonoBehaviour
 
         if(progressAmount >= 1)
         {
-            //Win
+            winAmounts++;
+            progressAmount = 0.0f;
         }
     }
 
