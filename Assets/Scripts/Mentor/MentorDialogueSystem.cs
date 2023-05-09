@@ -14,37 +14,45 @@ public class MentorDialogueSystem : MonoBehaviour
     [Header("StarterEvent Audioclips")]
     public List<AudioClip> startEventAudioclips;
 
-    [Header("Event 1 Audioclips")]
-    public List<AudioClip> event1Audioclips;
+    [Header("TutorialEvents")]
+    public List<AudioClip> tutorialEvent1;
+    public List<AudioClip> tutorialEvent2;
+    public List<AudioClip> tutorialEvent3;
+    public List<AudioClip> tutorialEvent4;
 
-    [Header("Event 2 Audioclips")]
-    public List<AudioClip> event2Audioclips;
+    [Header("Update step")]
+    private float currentUpdateTime = 0f;
 
     //step 1: Listen to for an event
     private void Start()
     {
         //mentorAudioSource = GetComponent<AudioSource>();
-        eventManager.starterEvent.AddListener(NewAudioClipList);
+        eventManager.tutorialEvent1.AddListener(NewAudioClipList);
+        eventManager.tutorialEvent2.AddListener(NewAudioClipList);
+        eventManager.tutorialEvent3.AddListener(NewAudioClipList);
+        eventManager.tutorialEvent4.AddListener(NewAudioClipList);
     }
     
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
         Debug.Log("in new audiocliplist");
-        Debug.Log(eventManager.starteventInvoked);
-        if (eventManager.starteventInvoked == true)
+
+        if (eventManager.tutorialEvent1Invoked == true)
         {
-            Debug.Log("new audio clip list start event");
-            Debug.Log(startEventAudioclips);
-            UpdateAudioClips(startEventAudioclips);
+            UpdateAudioClips(tutorialEvent1);
         }
-        else if (eventManager.event1Invoked == true)
+        else if (eventManager.tutorialEvent2Invoked == true)
         {
-            UpdateAudioClips(event1Audioclips);
+            UpdateAudioClips(tutorialEvent2);
         }
-        else if (eventManager.event2Invoked == true)
+        else if (eventManager.tutorialEvent3Invoked == true)
         {
-            UpdateAudioClips(event2Audioclips);
+            UpdateAudioClips(tutorialEvent3);
+        }
+        else if (eventManager.tutorialEvent4Invoked == true)
+        {
+            UpdateAudioClips(tutorialEvent4);
         }
     }
 
@@ -80,28 +88,24 @@ public class MentorDialogueSystem : MonoBehaviour
         }
 
     }
-
-    
-
-
-
-    //public void CheckCurrentEvent(EventManager.CurrentEvent currentEvent)
+    // SCALE MENTOR WHILE IT IS TALKING
+    //public void MentorScaleWhileTalk()
     //{
-    //    switch (currentEvent) 
+    //    currentUpdateTime += Time.deltaTime;
+    //    if (currentUpdateTime >= updateStep)
     //    {
-    //        case (EventManager.CurrentEvent.EVENT1):
-    //            UpdateAudioClips(event1Audioclips);
-    //            break;
+    //        currentUpdateTime = 0f;
+    //        mentorAudioSource.clip.GetData(clipSampleData, audioSource.timeSamples); //I read 1024 samples, which is about 80 ms on a 44khz stereo clip, beginning at the current sample position of the clip.
+    //        clipLoudness = 0f;
+    //        foreach (var sample in clipSampleData)
+    //        {
+    //            clipLoudness += Mathf.Abs(sample);
+    //        }
+    //        clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
 
-    //        case (EventManager.CurrentEvent.EVENT2):
-    //            UpdateAudioClips(event2Audioclips);
-    //            break;
+    //        clipLoudness *= sizeFactor;
+    //        clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
+    //        cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
     //    }
-
     //}
-
-
-
-
-
 }
