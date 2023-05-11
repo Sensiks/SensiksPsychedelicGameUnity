@@ -11,8 +11,6 @@ public class FurnaceTrigger : MonoBehaviour
     [SerializeField] private PressureMinigame pressureMinigame;
     [SerializeField] private CoalOnShovel coalOnShovel;
 
-    [Header("Stuff to keep track off")]
-    [SerializeField] public int coalsdeposited = 0;
     
     [Header("Settings")]
     [SerializeField] private float pressureFromCoal;
@@ -26,7 +24,7 @@ public class FurnaceTrigger : MonoBehaviour
             Debug.Log("Coal in fire");
             furnaceManager.FireOn();
             pressureMinigame.PressureChanger(pressureFromCoal);
-            coalsdeposited++;
+            pressureMinigame.coalAmountDeposited++;
             coalOnShovel.ShovelSwitch(false);
             //SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);
             //SensiksManager.SetActiveScent(Scent.SMOKE, 0.1f);

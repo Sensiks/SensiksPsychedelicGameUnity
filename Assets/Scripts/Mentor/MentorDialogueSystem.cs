@@ -36,7 +36,7 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
-        Debug.Log("in new audiocliplist");
+        Debug.Log("tutorialevent2: " + eventManager.tutorialEvent2Invoked);
 
         if (eventManager.tutorialEvent1Invoked == true)
         {
@@ -44,6 +44,7 @@ public class MentorDialogueSystem : MonoBehaviour
         }
         else if (eventManager.tutorialEvent2Invoked == true)
         {
+            
             UpdateAudioClips(tutorialEvent2);
         }
         else if (eventManager.tutorialEvent3Invoked == true)
@@ -59,6 +60,9 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 3: Transfer to list to currentaudioclips
     public void UpdateAudioClips(List<AudioClip> audioClipsToTranfer)
     {
+        int nmr = 0;
+        
+        Debug.Log("UpdateAudioClips" + nmr);
         currentAudioClips.Clear();
         foreach (AudioClip clipToTranfer in audioClipsToTranfer)
         {
@@ -67,19 +71,27 @@ public class MentorDialogueSystem : MonoBehaviour
 
         Debug.Log("Update Audio Clips " + currentAudioClips[1]);
 
+        nmr++;
+        
+    }
+
+    public void FixedUpdate()
+    {
         NextAudioClip();
     }
 
     //step 4: Play the audio clips
     public void NextAudioClip()
     {
-        Debug.Log("in NextAudioClip");
-        Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
+        //Debug.Log("in NextAudioClip");
+        //Debug.Log(currentAudioClips);
+        //Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
         if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
         {
-            Debug.Log("currentAudioclips: " + currentAudioClips.Count);
+            
             mentorAudioSource.clip = currentAudioClips[audioIndex];
             mentorAudioSource.Play();
+            Debug.Log("currentclip: " + mentorAudioSource.clip);
             audioIndex++;
         }
         else if (audioIndex > currentAudioClips.Count)

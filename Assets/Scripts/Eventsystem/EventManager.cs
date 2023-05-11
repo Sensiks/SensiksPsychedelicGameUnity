@@ -20,6 +20,12 @@ public class EventManager : MonoBehaviour
 
     [SerializeField] public bool tutorialEvent4Invoked;
     [SerializeField] public UnityEvent tutorialEvent4;
+
+    [Header("References")]
+    [SerializeField] private TrainManager trainManager;
+    [SerializeField] private PressureMinigame pressureMinigame;
+    
+
     
     public void Awake()
     {
@@ -35,7 +41,16 @@ public class EventManager : MonoBehaviour
     }
     private void Update()
     {
+        if (pressureMinigame.coalAmountDeposited == 1 && tutorialEvent2Invoked == false)
+        {
+            Debug.Log("coalAmountDeposted");
+            tutorialEvent2.Invoke();
+        }
 
+        if (pressureMinigame.winAmounts == 1 && !tutorialEvent3Invoked)
+        {
+            tutorialEvent3.Invoke();
+        }
     }
 
     private void CheckActiveEvent()

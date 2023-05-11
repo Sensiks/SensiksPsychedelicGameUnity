@@ -8,8 +8,8 @@ public class PressureMinigame : MonoBehaviour
     [Header("stuff to keep track of")]
     public bool minigameActive;
     [SerializeField] private bool handleActive;
-    [SerializeField] int winAmounts;
-    [SerializeField] int coalAmountDeposited;
+    [SerializeField] public int winAmounts;
+    [SerializeField] public int coalAmountDeposited;
 
     [Header("References")]
     [SerializeField] private EventManager eventManager;
@@ -37,7 +37,7 @@ public class PressureMinigame : MonoBehaviour
     [SerializeField] float fireSize;
     
     [SerializeField] private float firePullVelocity;
-    [SerializeField] private float fireInscreasePower = 0.0001f;
+    [SerializeField] private float fireInscreaseDegredation;
     [SerializeField] private float fireNaturalDecreasePower = 0.00003f;
     [SerializeField] private float maxDecreaseVeloticy = -0.0008f;
 
@@ -67,7 +67,7 @@ public class PressureMinigame : MonoBehaviour
     /// 2 == OFF
     /// 3 == TUTORIAL
     /// </summary>
-    /// <param name="newState"></param>
+    /// <param name="newState">int for what the new gamestate should be</param>
     public void UpdateGameState(int newState = 0)
     {
         if (newState == 0)
@@ -78,7 +78,7 @@ public class PressureMinigame : MonoBehaviour
             miniGameState = (MinigameState)newState;
 
 
-        Debug.Log(miniGameState);
+        
         switch ((MinigameState)newState)
         {
             case MinigameState.DEFAULT:
@@ -106,7 +106,7 @@ public class PressureMinigame : MonoBehaviour
                 PressureChanger();
                 GoalMover();
                 lastMiniGameState = MinigameState.TUTORIAL;
-                Debug.Log("TUTORIAL state");
+                //Debug.Log("TUTORIAL state");
                 break;
         }
     }
@@ -133,17 +133,37 @@ public class PressureMinigame : MonoBehaviour
         //Manually change pressure (both increase and decrease)
         if (increasePower == 0)
         {
-
+            //Nothing happens
         }
         else
         {
             firePullVelocity += increasePower * Time.deltaTime;
+
+            if(firePosition >= 0.94f)
+            {
+                Debug.Log("fireposition max");
+                firePullVelocity = 0f;
+            }
+
+            if(firePullVelocity > 0)
+            {
+                firePullVelocity -= fireInscreaseDegredation * Time.deltaTime;
+            }
+
+            
         }
 
+        
         //Natural Decrease slowly over time
         if (firePullVelocity >= maxDecreaseVeloticy && !handleActive)
         {
             firePullVelocity -= fireNaturalDecreasePower * Time.deltaTime;
+        }
+
+        if (firePosition <= 0.06f && firePullVelocity <= 0.0f)
+        {
+            Debug.Log("fireposition min");
+            firePullVelocity = 0f;
         }
 
         //Update position of fire
@@ -189,12 +209,12 @@ public class PressureMinigame : MonoBehaviour
         //Debug.Log("min: " + min + "max: " + max);
         if (min < firePosition && firePosition < max)
         {
-            Debug.Log("Increase");
+            //Debug.Log("Increase");
             progressAmount += progressBarIncrease * Time.deltaTime;
         }
         else
         {
-            Debug.Log("Decrease");
+            //Debug.Log("Decrease");
             progressAmount -= progressBarDegredasion * Time.deltaTime;
         }
 
