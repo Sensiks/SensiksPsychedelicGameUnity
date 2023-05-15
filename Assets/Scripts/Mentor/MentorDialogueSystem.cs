@@ -8,11 +8,11 @@ public class MentorDialogueSystem : MonoBehaviour
 
     private int audioIndex = 0;
     public EventManager eventManager;
-    
-    public List<AudioClip> currentAudioClips;
 
-    [Header("StarterEvent Audioclips")]
-    public List<AudioClip> startEventAudioclips;
+    private int nmr = 0;
+
+
+    public List<AudioClip> currentAudioClips;
 
     [Header("TutorialEvents")]
     public List<AudioClip> tutorialEvent1;
@@ -32,11 +32,16 @@ public class MentorDialogueSystem : MonoBehaviour
         eventManager.tutorialEvent3.AddListener(NewAudioClipList);
         eventManager.tutorialEvent4.AddListener(NewAudioClipList);
     }
-    
+
+    public void FixedUpdate()
+    {
+        NextAudioClip();
+    }
+
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
-        Debug.Log("tutorialevent2: " + eventManager.tutorialEvent2Invoked);
+        
 
         if (eventManager.tutorialEvent1Invoked == true)
         {
@@ -44,41 +49,43 @@ public class MentorDialogueSystem : MonoBehaviour
         }
         else if (eventManager.tutorialEvent2Invoked == true)
         {
-            
+            Debug.Log("tutorialevent2: " + eventManager.tutorialEvent2Invoked);
             UpdateAudioClips(tutorialEvent2);
+            
         }
         else if (eventManager.tutorialEvent3Invoked == true)
         {
+            Debug.Log("tutorialevent3: " + eventManager.tutorialEvent3Invoked);
             UpdateAudioClips(tutorialEvent3);
+            
         }
         else if (eventManager.tutorialEvent4Invoked == true)
         {
+            Debug.Log("tutorialevent4: " + eventManager.tutorialEvent4Invoked);
             UpdateAudioClips(tutorialEvent4);
+            
         }
     }
 
     //step 3: Transfer to list to currentaudioclips
     public void UpdateAudioClips(List<AudioClip> audioClipsToTranfer)
     {
-        int nmr = 0;
         
         Debug.Log("UpdateAudioClips" + nmr);
         currentAudioClips.Clear();
         foreach (AudioClip clipToTranfer in audioClipsToTranfer)
         {
+            Debug.Log("cliptoTransfer: " + clipToTranfer);
             currentAudioClips.Add(clipToTranfer);
         }
 
-        Debug.Log("Update Audio Clips " + currentAudioClips[1]);
+        Debug.Log("Update Audio Clips " + currentAudioClips[nmr]);
 
         nmr++;
         
     }
 
-    public void FixedUpdate()
-    {
-        NextAudioClip();
-    }
+    
 
     //step 4: Play the audio clips
     public void NextAudioClip()

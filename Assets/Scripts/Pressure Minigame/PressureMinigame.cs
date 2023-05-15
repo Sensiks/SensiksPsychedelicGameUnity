@@ -43,7 +43,7 @@ public class PressureMinigame : MonoBehaviour
 
     [Header("Progress Bar")]
     [SerializeField] Transform progressBarTransform;
-    private float progressAmount;
+    public float progressAmount;
     [SerializeField] float progressBarIncrease;
     [SerializeField] float progressBarDegredasion;
 
@@ -54,7 +54,7 @@ public class PressureMinigame : MonoBehaviour
     public enum MinigameState
         {DEFAULT = 0, ON = 1, OFF = 2, TUTORIAL = 3}
 
-    public void Update()
+    public void FixedUpdate()
     {
         UpdateGameState();
 
@@ -82,7 +82,7 @@ public class PressureMinigame : MonoBehaviour
         switch ((MinigameState)newState)
         {
             case MinigameState.DEFAULT:
-                Debug.Log("DEFAULT state ");
+                //Debug.Log("DEFAULT state ");
                 break;
 
             case MinigameState.ON:
@@ -139,11 +139,7 @@ public class PressureMinigame : MonoBehaviour
         {
             firePullVelocity += increasePower * Time.deltaTime;
 
-            if(firePosition >= 0.94f)
-            {
-                Debug.Log("fireposition max");
-                firePullVelocity = 0f;
-            }
+            
 
             if(firePullVelocity > 0)
             {
@@ -160,9 +156,15 @@ public class PressureMinigame : MonoBehaviour
             firePullVelocity -= fireNaturalDecreasePower * Time.deltaTime;
         }
 
-        if (firePosition <= 0.06f && firePullVelocity <= 0.0f)
+        //check if the position is at the beginning or end of the bar, if so set velocity to 0;
+        if (firePosition >= 0.94f && firePullVelocity >= 0f)
         {
-            Debug.Log("fireposition min");
+            
+            firePullVelocity = 0f;
+        }
+        else if (firePosition <= 0.06f && firePullVelocity <= 0.0f)
+        {
+            
             firePullVelocity = 0f;
         }
 
@@ -222,9 +224,11 @@ public class PressureMinigame : MonoBehaviour
 
         if (progressAmount >= 1)
         {
-            winAmounts++;
-            progressAmount = 0.0f;
+            Win();
         }
+
+        //events
+        
     }
 
     public void ActivateMinigame(bool activateMinigame)
@@ -241,6 +245,13 @@ public class PressureMinigame : MonoBehaviour
         goalPosition = Mathf.Clamp(newGoalPosition, currentWidth / 2, 1 - currentWidth / 2);
         goalPosition = Mathf.SmoothDamp(goalPosition, nextGoalDestination, ref goalSpeed, smoothMotion);
         goal.position = Vector3.Lerp(bottemPivot.position, topPivot.position, goalPosition);
+    }
+
+    //if progressbar is full Win.
+    public void Win()
+    {
+        winAmounts++;
+        progressAmount = 0.0f;
     }
 
         
