@@ -24,7 +24,7 @@ public class FurnaceManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         distanceToPlayer = Vector3.Distance(player.position, fireParticle.GetComponent<Transform>().position);
 

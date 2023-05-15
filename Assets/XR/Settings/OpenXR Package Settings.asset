@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79c911b38743a649b1c1eddb5097202, type: 3}
   m_Name: HandTrackingFeaturePlugin Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Hand Tracking
   version: 1.8.0
   featureIdInternal: com.microsoft.openxr.feature.handtracking
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8f1ce8139888c4ab621f6b3c8bb558, type: 3}
   m_Name: MotionControllerFeaturePlugin Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Motion Controller Model
   version: 1.8.0
   featureIdInternal: com.microsoft.openxr.feature.controller
@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: -5891442825742734632}
   - {fileID: 2058774848148253362}
   - {fileID: -2152945769674507089}
-  m_renderMode: 0
+  m_renderMode: 1
   m_depthSubmissionMode: 0
 --- !u!114 &-992746197314108083
 MonoBehaviour:
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3482401f887b8864183e401715462f46, type: 3}
   m_Name: HPMixedRealityControllerProfile Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: HP Reverb G2 Controller Profile
   version: 1.8.0
   featureIdInternal: com.microsoft.openxr.feature.interaction.hpmixedrealitycontroller

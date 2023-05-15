@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChangingWhenInvisible : MonoBehaviour
 {
+    [SerializeField] private Camera playerCamera;
+    private MeshRenderer objectRenderer;
     public List<GameObject> objectPool;
     private int currentinx = 0;
     public Transform spawnLocation;
@@ -12,8 +14,8 @@ public class ChangingWhenInvisible : MonoBehaviour
 
     void Start()
     {
-
         UpdateList();
+        objectRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
         
     }
 
@@ -22,34 +24,27 @@ public class ChangingWhenInvisible : MonoBehaviour
         changerActive = onOff;
     }
 
-    //private void Update()
-    //{
-
-    //    MeshRenderer meshRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
-    //    Debug.Log("Meshrenderer visible" + meshRenderer.isVisible);
-        
-    //    if (!meshRenderer.isVisible && changerActive == true)
-    //    {
-    //        Debug.Log("The mesh renderer is not visible to the player.");
-    //        SwitchObject();
-    //    }  
-    //}
-
-    public void OnBecameVisible()
+    private void Update()
     {
-        Debug.Log("IsVisable");
-    }
-
-    public void OnBecameInvisible()
-    {
-
-        Debug.Log("iam invisible");
+        Debug.Log("objectpool list: " + objectPool[currentinx]);
         if (changerActive)
         {
-            SwitchObject();
-        }
+            // Check if the object is within the camera's view frustum
+            if (IsVisibleFromCamera())
+            {
+                // Object is visible
+                Debug.Log("Object is visible");
 
+            }
+            else
+            {
+                // Object is not visible
+                Debug.Log("Object is not visible");
+                //SwitchObject();
+            }
+        }
     }
+
 
     private void UpdateList()
     {
@@ -64,16 +59,35 @@ public class ChangingWhenInvisible : MonoBehaviour
         objectPool[currentinx].SetActive(false);
         objectPool[currentinx + 1].SetActive(true);
         currentinx++;
+        objectRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
 
-        if(currentinx >= objectPool.Count)
+        if (currentinx >= objectPool.Count)
         {
             currentinx = 0;
         }
     }
 
-    private void Eventriggers()
+    private bool IsVisibleFromCamera()
     {
+        Debug.Log("objectRenderer: " + objectRenderer);
+        // If the object has no renderer or is not enabled, consider it invisible
+        if (objectRenderer == null || !objectRenderer.enabled)
+        {
+            return false;
+        }
 
+        
+
+        // Get the object's bounds
+        Bounds bounds = objectRenderer.bounds;
+
+        // Check if the bounds intersect with the camera's view frustum
+        if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(playerCamera), bounds))
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }
