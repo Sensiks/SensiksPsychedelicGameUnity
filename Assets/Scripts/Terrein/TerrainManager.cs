@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
-    [SerializeField]
-    public List<GameObject> forrestTerrains;
-    [SerializeField]
-    public List<GameObject> beachTerrains;
-    public int quarterIndx, changedTerrains;
+    [SerializeField] public List<GameObject> forrestTerrains;
+    [SerializeField] public List<GameObject> beachTerrains;
+    [HideInInspector] public int quarterIndx, changedTerrains;
+    public bool changeTerrainActive;
 
-
+    //Toggles Terrain changer on and off.
+    public void ChangeTerrainActivator(bool OnorOff)
+    {
+        changeTerrainActive = OnorOff;
+    }
 }

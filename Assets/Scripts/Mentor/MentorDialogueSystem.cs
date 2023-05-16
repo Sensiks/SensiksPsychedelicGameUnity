@@ -41,8 +41,6 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
-        
-
         if (eventManager.tutorialEvent1Invoked == true)
         {
             UpdateAudioClips(tutorialEvent1);
@@ -71,21 +69,20 @@ public class MentorDialogueSystem : MonoBehaviour
     public void UpdateAudioClips(List<AudioClip> audioClipsToTranfer)
     {
         
-        Debug.Log("UpdateAudioClips" + nmr);
+        Debug.Log("UpdateAudioClips before foreach: " + nmr);
         currentAudioClips.Clear();
+        
         foreach (AudioClip clipToTranfer in audioClipsToTranfer)
         {
             Debug.Log("cliptoTransfer: " + clipToTranfer);
             currentAudioClips.Add(clipToTranfer);
         }
 
-        Debug.Log("Update Audio Clips " + currentAudioClips[nmr]);
+        Debug.Log("Update Audio Clips after foreach: " + currentAudioClips[nmr]);
 
         nmr++;
         
     }
-
-    
 
     //step 4: Play the audio clips
     public void NextAudioClip()
@@ -95,7 +92,7 @@ public class MentorDialogueSystem : MonoBehaviour
         //Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
         if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
         {
-            
+
             mentorAudioSource.clip = currentAudioClips[audioIndex];
             mentorAudioSource.Play();
             Debug.Log("currentclip: " + mentorAudioSource.clip);
@@ -107,6 +104,7 @@ public class MentorDialogueSystem : MonoBehaviour
         }
 
     }
+
     // SCALE MENTOR WHILE IT IS TALKING
     //public void MentorScaleWhileTalk()
     //{

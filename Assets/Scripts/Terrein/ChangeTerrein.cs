@@ -5,28 +5,30 @@ using UnityEditor;
 
 public class ChangeTerrein : MonoBehaviour
 {
-    private EventManager eventManager;
-    [SerializeField]
-    private RotateScript rotate;
+    [Header("References")]
+    [SerializeField] private EventManager eventManager;
+    [SerializeField] private TerrainManager terrainManager;
+    [SerializeField] private RotateScript rotateScript;
+
 
     public Terrain terrainToBeRoteted;
 
-    [SerializeField]
-    private TerrainManager terrainManager;
+
+    
     public bool event1Active;
     
     [SerializeField]
     private int amountOfRounds;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player" && terrainManager.changeTerrainActive == true)
         {
             Debug.Log("ChangeTerrain");
             SelectTerrain();
         }
     }
 
-    
+    //Select right terrain tile to be replaced
     private void SelectTerrain()
     {
         terrainToBeRoteted = terrainManager.beachTerrains[terrainManager.changedTerrains].GetComponent<Terrain>();
@@ -52,6 +54,7 @@ public class ChangeTerrein : MonoBehaviour
 
     }
 
+    //Replace terrein tile
     private void ChangeTerrainToOcean(int selectedTerrein)
     {
 
@@ -75,24 +78,24 @@ public class ChangeTerrein : MonoBehaviour
             terrainManager.beachTerrains[terrainManager.changedTerrains].transform.position = locationNewTerrain;
 
             //Rotate the terrein to its right position (has to be done like this terrein can't be rotated via the transform)
-            switch (terrainManager.quarterIndx)
-            {
-                case (0):
-                    rotateTerreinRightDirection();
-                    rotateTerreinRightDirection();
+            //switch (terrainManager.quarterIndx)
+            //{
+            //    case (0):
+            //        //rotateTerreinRightDirection();
+            //        //rotateTerreinRightDirection();
 
-                    break;
-                case (1):
-                    rotateTerreinRightDirection();
-                    break;
-                case (2):
-                    rotateTerreinRightDirection();
-                    break;
-                case (3):
-                    rotateTerreinRightDirection();
-                    break;
+            //        break;
+            //    case (1):
+            //        //rotateTerreinRightDirection();
+            //        break;
+            //    case (2):
+            //        //rotateTerreinRightDirection();
+            //        break;
+            //    case (3):
+            //        //rotateTerreinRightDirection();
+            //        break;
 
-            }
+            //}
 
             //reset changedTerrains
             if (terrainManager.changedTerrains > terrainManager.beachTerrains.Count)
@@ -105,8 +108,8 @@ public class ChangeTerrein : MonoBehaviour
     private void rotateTerreinRightDirection()
     {
         //Look for terrain component !!still needs to be saved
-         
 
-        rotate.RotateTerrain(terrainToBeRoteted);
+
+        rotateScript.RotateTerrain(terrainToBeRoteted);
     }
 }

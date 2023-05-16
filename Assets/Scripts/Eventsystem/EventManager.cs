@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
     //public Transform NextObjectiveMentor;
     //public List<AudioClip> audioClips;
 
-    [Header("TutorialEvent")]
+    [Header("TutorialEvents")]
     [SerializeField] public bool tutorialEvent1Invoked;
     [SerializeField] public UnityEvent tutorialEvent1;
 
@@ -21,9 +21,13 @@ public class EventManager : MonoBehaviour
     [SerializeField] public bool tutorialEvent4Invoked;
     [SerializeField] public UnityEvent tutorialEvent4;
 
-    [Header("")]
+    [Header("After Tutorial Event")]
     [SerializeField] public bool afterTutorialEventInvoked;
     [SerializeField] public UnityEvent afterTutorialEvent;
+
+    [Header("3 Minigame Win Event")]
+    [SerializeField] public bool threeWinEventInvoked;
+    [SerializeField] public UnityEvent threeWinEvent;
 
     [Header("References")]
     [SerializeField] private TrainManager trainManager;
@@ -38,6 +42,8 @@ public class EventManager : MonoBehaviour
         tutorialEvent3.AddListener(() => tutorialEvent3Invoked = true);
         tutorialEvent4.AddListener(() => tutorialEvent4Invoked = true);
         afterTutorialEvent.AddListener(() => afterTutorialEventInvoked = true);
+        threeWinEvent.AddListener(() => threeWinEventInvoked = true);
+
     }
 
     public void Start()
@@ -46,7 +52,7 @@ public class EventManager : MonoBehaviour
     }
     private void Update()
     {
-        if (pressureMinigame.coalAmountDeposited == 1 && !tutorialEvent2Invoked)
+        if (pressureMinigame.coalAmountDeposited == 1 && tutorialEvent1Invoked)
         {
             Debug.Log("coalAmountDeposted");
             tutorialEvent1Invoked = false;
@@ -54,7 +60,7 @@ public class EventManager : MonoBehaviour
             
         }
 
-        if (pressureMinigame.winAmounts == 1 && !tutorialEvent3Invoked)
+        if (pressureMinigame.winAmounts == 1 && tutorialEvent2Invoked)
         {
             tutorialEvent2Invoked = false;
             tutorialEvent3.Invoke();
@@ -66,10 +72,16 @@ public class EventManager : MonoBehaviour
             tutorialEvent4.Invoke();
         }
 
-        if (pressureMinigame.winAmounts == 2 && !afterTutorialEventInvoked)
+        if (pressureMinigame.winAmounts == 2 && tutorialEvent4Invoked)
         {
             tutorialEvent4Invoked = false;
             afterTutorialEvent.Invoke();
+        }
+
+        if(pressureMinigame.winAmounts == 3 && afterTutorialEventInvoked)
+        {
+            afterTutorialEventInvoked = false;
+            threeWinEvent.Invoke();
         }
     }
 

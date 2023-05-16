@@ -16,17 +16,16 @@ public class ChangingWhenInvisible : MonoBehaviour
     {
         UpdateList();
         objectRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
-        
-    }
 
-    public void TurnOnChanger(bool onOff)
+    }
+    public void ChangeObjectActivator(bool OnorOff)
     {
-        changerActive = onOff;
+        changerActive = OnorOff;
     }
 
     private void Update()
     {
-        Debug.Log("objectpool list: " + objectPool[currentinx]);
+        //Debug.Log("objectpool list: " + objectPool[currentinx]);
         if (changerActive)
         {
             // Check if the object is within the camera's view frustum
@@ -40,7 +39,7 @@ public class ChangingWhenInvisible : MonoBehaviour
             {
                 // Object is not visible
                 Debug.Log("Object is not visible");
-                //SwitchObject();
+                SwitchObject();
             }
         }
     }
@@ -57,19 +56,21 @@ public class ChangingWhenInvisible : MonoBehaviour
     private void SwitchObject()
     {
         objectPool[currentinx].SetActive(false);
-        objectPool[currentinx + 1].SetActive(true);
         currentinx++;
-        objectRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
-
+        
         if (currentinx >= objectPool.Count)
         {
+            Debug.Log("currentinx: " + currentinx + "objectpool.count: " + objectPool.Count);
             currentinx = 0;
         }
+
+        objectPool[currentinx].SetActive(true);
     }
 
     private bool IsVisibleFromCamera()
     {
-        Debug.Log("objectRenderer: " + objectRenderer);
+        objectRenderer = objectPool[currentinx].GetComponent<MeshRenderer>();
+        Debug.Log("objectMeshRenderer: " + objectRenderer);
         // If the object has no renderer or is not enabled, consider it invisible
         if (objectRenderer == null || !objectRenderer.enabled)
         {
