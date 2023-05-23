@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MentorDialogueSystem : MonoBehaviour
 {
+    [Header("References")]
     public AudioSource mentorAudioSource;
-
-    private int audioIndex = 0;
     public EventManager eventManager;
+    public GameObject mentor;
 
+    [Header("StuffToKeepTrack off")]
+    private int audioIndex = 0;
     private int nmr = 0;
-
-
     public List<AudioClip> currentAudioClips;
 
     [Header("TutorialEvents")]
@@ -20,8 +20,42 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> tutorialEvent3;
     public List<AudioClip> tutorialEvent4;
 
-    [Header("Update step")]
+    [Header("MentorScaler")]
+    public float updateStep = 0.1f;
+    public int sampleDataLength = 1024;
     private float currentUpdateTime = 0f;
+
+    public float clipLoudness;
+    private float[] clipSampleData;
+
+    public float sizeFactor = 1f;
+    public float minSize = 0;
+    public float maxSize = 500;
+
+    public void Awake()
+    {
+        clipSampleData = new float[sampleDataLength];
+    }
+    // SCALE MENTOR WHILE IT IS TALKING
+    public void MentorScaleWhileTalk()
+    {
+        currentUpdateTime += Time.deltaTime;
+        if (currentUpdateTime >= updateStep)
+        {
+            currentUpdateTime = 0f;
+            mentorAudioSource.clip.GetData(clipSampleData, mentorAudioSource.timeSamples); //I read 1024 samples, which is about 80 ms on a 44khz stereo clip, beginning at the current sample position of the clip.
+            clipLoudness = 0f;
+            foreach (var sample in clipSampleData)
+            {
+                clipLoudness += Mathf.Abs(sample);
+            }
+            clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
+
+            clipLoudness *= sizeFactor;
+            clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
+            mentor.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
+        }
+    }
 
     //step 1: Listen to for an event
     private void Start()
@@ -36,6 +70,11 @@ public class MentorDialogueSystem : MonoBehaviour
     public void FixedUpdate()
     {
         NextAudioClip();
+    }
+
+    public void Update()
+    {
+        MentorScaleWhileTalk();
     }
 
     //step 2: Choose a new list to listen to
@@ -105,24 +144,5 @@ public class MentorDialogueSystem : MonoBehaviour
 
     }
 
-    // SCALE MENTOR WHILE IT IS TALKING
-    //public void MentorScaleWhileTalk()
-    //{
-    //    currentUpdateTime += Time.deltaTime;
-    //    if (currentUpdateTime >= updateStep)
-    //    {
-    //        currentUpdateTime = 0f;
-    //        mentorAudioSource.clip.GetData(clipSampleData, audioSource.timeSamples); //I read 1024 samples, which is about 80 ms on a 44khz stereo clip, beginning at the current sample position of the clip.
-    //        clipLoudness = 0f;
-    //        foreach (var sample in clipSampleData)
-    //        {
-    //            clipLoudness += Mathf.Abs(sample);
-    //        }
-    //        clipLoudness /= sampleDataLength; //clipLoudness is what you are looking for
-
-    //        clipLoudness *= sizeFactor;
-    //        clipLoudness = Mathf.Clamp(clipLoudness, minSize, maxSize);
-    //        cube.transform.localScale = new Vector3(clipLoudness, clipLoudness, clipLoudness);
-    //    }
-    //}
+ 
 }
