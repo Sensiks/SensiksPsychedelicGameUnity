@@ -49,6 +49,7 @@ public class EventManager : MonoBehaviour
     public void Start()
     {
         tutorialEvent1.Invoke();
+        Debug.Log("tutorialevent1 invoked");
     }
     private void Update()
     {
@@ -57,31 +58,38 @@ public class EventManager : MonoBehaviour
             Debug.Log("coalAmountDeposted");
             tutorialEvent1Invoked = false;
             tutorialEvent2.Invoke();
-            
+            Debug.Log("tutorialevent2 invoked");
+
         }
 
         if (pressureMinigame.winAmounts == 1 && tutorialEvent2Invoked)
         {
+            
             tutorialEvent2Invoked = false;
             tutorialEvent3.Invoke();
+            Debug.Log("tutorialevent3 invoked");
+
         }
 
         if (pressureMinigame.progressAmount > 0 && tutorialEvent3Invoked)
         {
             tutorialEvent3Invoked = false;
             tutorialEvent4.Invoke();
+            Debug.Log("tutorialevent4 invoked");
         }
 
         if (pressureMinigame.winAmounts == 2 && tutorialEvent4Invoked)
         {
             tutorialEvent4Invoked = false;
             afterTutorialEvent.Invoke();
+            Debug.Log("aftertutorialevent invoked");
         }
 
         if(pressureMinigame.winAmounts == 3 && afterTutorialEventInvoked)
         {
             afterTutorialEventInvoked = false;
             threeWinEvent.Invoke();
+            Debug.Log("threewinevent invoked");
         }
     }
 
