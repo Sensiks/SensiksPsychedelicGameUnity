@@ -1392,6 +1392,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 253124364}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!43 &290025806
 Mesh:
   m_ObjectHideFlags: 0
@@ -1556,6 +1557,8 @@ Mesh:
     offset: 0
     size: 0
     path: 
+=======
+>>>>>>> Stashed changes
 --- !u!4 &295411320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4188878019612106, guid: fa1fbed80c6345a4da5ccfbda3b22ac4,
@@ -2017,6 +2020,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 381808902}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!43 &383678531
 Mesh:
   m_ObjectHideFlags: 0
@@ -2181,6 +2185,8 @@ Mesh:
     offset: 0
     size: 0
     path: 
+=======
+>>>>>>> Stashed changes
 --- !u!82 &394184759 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 394184759, guid: 42c53210cc818b048b34feec8e1b0718,
@@ -4348,19 +4354,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FurnaceTrigger, Assembly-CSharp
-        m_MethodName: ChangePressureFromCoal
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0.28
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -6451,6 +6445,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1297131340}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!43 &1345617465
 Mesh:
   m_ObjectHideFlags: 0
@@ -6615,6 +6610,8 @@ Mesh:
     offset: 0
     size: 0
     path: 
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &1355882052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8010,6 +8007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   train: {fileID: 1806589003}
+  coalCart: {fileID: 1400249328}
+  coupe: {fileID: 873076330}
   trainAudioSource: {fileID: 394184759}
   trainBackgroundSound: {fileID: 8300000, guid: aea8844186a2632449935d854bb51ca3,
     type: 3}
@@ -10286,34 +10285,34 @@ PrefabInstance:
     - target: {fileID: 140739749, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1345617465}
+      objectReference: {fileID: 0}
     - target: {fileID: 140739750, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1345617465}
+      objectReference: {fileID: 0}
     - target: {fileID: 140739753, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1345617465}
+      objectReference: {fileID: 0}
     - target: {fileID: 140739753, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_VersionIndex
-      value: 4952
+      value: 4958
       objectReference: {fileID: 0}
     - target: {fileID: 275441325, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 290025806}
+      objectReference: {fileID: 0}
     - target: {fileID: 275441326, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 290025806}
+      objectReference: {fileID: 0}
     - target: {fileID: 275441329, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 290025806}
+      objectReference: {fileID: 0}
     - target: {fileID: 275441329, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_VersionIndex
-      value: 2265
+      value: 2271
       objectReference: {fileID: 0}
     - target: {fileID: 738418133, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
@@ -10334,18 +10333,18 @@ PrefabInstance:
     - target: {fileID: 1773385027, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 383678531}
+      objectReference: {fileID: 0}
     - target: {fileID: 1773385028, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 383678531}
+      objectReference: {fileID: 0}
     - target: {fileID: 1773385031, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 383678531}
+      objectReference: {fileID: 0}
     - target: {fileID: 1773385031, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
       propertyPath: m_VersionIndex
-      value: 2380
+      value: 2386
       objectReference: {fileID: 0}
     - target: {fileID: 11876382946534238, guid: 42c53210cc818b048b34feec8e1b0718,
         type: 3}
@@ -11041,6 +11040,8 @@ PrefabInstance:
     - {fileID: 8636525125473185902, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
     - {fileID: 8636525125473185905, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
     - {fileID: 8636525125473185903, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
+    - {fileID: 8246823496093865116, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
+    - {fileID: 7414312803177064706, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 42c53210cc818b048b34feec8e1b0718, type: 3}
 --- !u!1 &1983105002 stripped
 GameObject:
