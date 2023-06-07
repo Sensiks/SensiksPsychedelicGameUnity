@@ -10616,6 +10616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11876382946534238, guid: 42c53210cc818b048b34feec8e1b0718,
         type: 3}
+      propertyPath: tutorialEvent5.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11876382946534238, guid: 42c53210cc818b048b34feec8e1b0718,
+        type: 3}
       propertyPath: tutorialEvent1.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 91bd359e5d3c2e444a46c9412cbd4f23, type: 3}
@@ -10654,6 +10659,16 @@ PrefabInstance:
       propertyPath: tutorialEvent4.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 6905e89287693b54295ea5deea667962, type: 3}
+    - target: {fileID: 11876382946534238, guid: 42c53210cc818b048b34feec8e1b0718,
+        type: 3}
+      propertyPath: tutorialEvent5.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7a09d8123c8ed6442809742613973838, type: 3}
+    - target: {fileID: 11876382946534238, guid: 42c53210cc818b048b34feec8e1b0718,
+        type: 3}
+      propertyPath: tutorialEvent5.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 27d8b532720a20d4497c8a66e562b499, type: 3}
     - target: {fileID: 65447500081542435, guid: 42c53210cc818b048b34feec8e1b0718,
         type: 3}
       propertyPath: m_LocalPosition.x
