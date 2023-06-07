@@ -21,6 +21,9 @@ public class EventManager : MonoBehaviour
     [SerializeField] public bool tutorialEvent4Invoked;
     [SerializeField] public UnityEvent tutorialEvent4;
 
+    [SerializeField] public bool tutorialEvent5Invoked;
+    [SerializeField] public UnityEvent tutorialEvent5;
+
     [Header("After Tutorial Event")]
     [SerializeField] public bool afterTutorialEventInvoked;
     [SerializeField] public UnityEvent afterTutorialEvent;

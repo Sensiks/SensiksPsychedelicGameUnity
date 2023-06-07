@@ -19,6 +19,7 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> tutorialEvent2;
     public List<AudioClip> tutorialEvent3;
     public List<AudioClip> tutorialEvent4;
+    public List<AudioClip> tutorialEvent5;
 
     [Header("MentorScaler")]
     public float updateStep = 0.1f;
@@ -46,11 +47,12 @@ public class MentorDialogueSystem : MonoBehaviour
         eventManager.tutorialEvent2.AddListener(NewAudioClipList);
         eventManager.tutorialEvent3.AddListener(NewAudioClipList);
         eventManager.tutorialEvent4.AddListener(NewAudioClipList);
+        eventManager.tutorialEvent5.AddListener(NewAudioClipList);
     }
 
     public void FixedUpdate()
     {
-        //NextAudioClip();
+        NextAudioClip();
     }
 
     public void Update()

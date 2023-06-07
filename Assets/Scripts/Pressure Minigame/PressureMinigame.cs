@@ -254,5 +254,11 @@ public class PressureMinigame : MonoBehaviour
         progressAmount = 0.0f;
     }
 
+    public void ActivateLever(bool Activation)
+    {
+        handleActive = Activation;
+        Debug.Log("HandelActive: " + handleActive);
+    }
+
         
 }
