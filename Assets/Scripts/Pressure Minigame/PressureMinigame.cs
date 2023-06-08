@@ -155,6 +155,10 @@ public class PressureMinigame : MonoBehaviour
         {
             firePullVelocity -= fireNaturalDecreasePower * Time.deltaTime;
         }
+        else if (handleActive)
+        {
+            firePullVelocity -= (fireNaturalDecreasePower * 1.5f) * Time.deltaTime;
+        }
 
         //check if the position is at the beginning or end of the bar, if so set velocity to 0;
         if (firePosition >= 0.94f && firePullVelocity >= 0f)

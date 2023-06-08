@@ -84,11 +84,11 @@ public class EventManager : MonoBehaviour
         if (pressureMinigame.winAmounts == 2 && tutorialEvent4Invoked)
         {
             tutorialEvent4Invoked = false;
-            afterTutorialEvent.Invoke();
+            tutorialEvent5.Invoke();
             Debug.Log("aftertutorialevent invoked");
         }
 
-        if(pressureMinigame.winAmounts == 3 && afterTutorialEventInvoked)
+        if(pressureMinigame.winAmounts == 6 && afterTutorialEventInvoked)
         {
             afterTutorialEventInvoked = false;
             threeWinEvent.Invoke();

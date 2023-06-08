@@ -12,7 +12,7 @@ public class TrainManager : MonoBehaviour
     [SerializeField] private AudioSource trainAudioSource;
     [SerializeField] private AudioClip trainBackgroundSound;
 
-    private float acceleration = 1f;
+    private float acceleration = 0.3f;
     private float currentSpeed = 0f;
 
 
