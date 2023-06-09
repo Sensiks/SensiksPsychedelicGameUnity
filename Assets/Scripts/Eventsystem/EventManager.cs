@@ -54,6 +54,7 @@ public class EventManager : MonoBehaviour
         tutorialEvent1.Invoke();
         Debug.Log("tutorialevent1 invoked");
     }
+
     private void Update()
     {
         if (pressureMinigame.coalAmountDeposited == 1 && tutorialEvent1Invoked)
@@ -74,7 +75,7 @@ public class EventManager : MonoBehaviour
 
         }
 
-        if (pressureMinigame.progressAmount > 0 && tutorialEvent3Invoked)
+        if (pressureMinigame.progressAmount == 0 && tutorialEvent3Invoked)
         {
             tutorialEvent3Invoked = false;
             tutorialEvent4.Invoke();
