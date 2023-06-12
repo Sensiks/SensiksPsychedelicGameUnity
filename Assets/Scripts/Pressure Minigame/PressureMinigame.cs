@@ -38,7 +38,8 @@ public class PressureMinigame : MonoBehaviour
     
     [SerializeField] private float firePullVelocity;
     [SerializeField] private float fireInscreaseDegredation;
-    [SerializeField] private float fireNaturalDecreasePower = 0.00003f;
+    [SerializeField] private float fireMultiplication;
+    [SerializeField] private float fireDecreasePower = 0.00003f;
     [SerializeField] private float maxDecreaseVeloticy = -0.0008f;
 
     [Header("Progress Bar")]
@@ -138,32 +139,34 @@ public class PressureMinigame : MonoBehaviour
         else
         {
             firePullVelocity += increasePower * Time.deltaTime;
+        }
 
+        if (firePullVelocity > 0)
+        {
+            firePullVelocity -= fireInscreaseDegredation * Time.deltaTime;
             
+        }
 
-            if(firePullVelocity > 0)
+        if (handleActive)
+        {
+            firePullVelocity -= fireDecreasePower * Time.deltaTime;
+            if (firePullVelocity <= maxDecreaseVeloticy)
             {
-                firePullVelocity -= fireInscreaseDegredation * Time.deltaTime;
+                firePullVelocity = maxDecreaseVeloticy;
             }
+        }
+        else if (firePullVelocity < 0 && !handleActive)
+        {
 
+            firePullVelocity += fireInscreaseDegredation * Time.deltaTime;
             
-        }
 
+        }
         
-        //Natural Decrease slowly over time
-        if (firePullVelocity >= maxDecreaseVeloticy && !handleActive)
-        {
-            firePullVelocity -= fireNaturalDecreasePower * Time.deltaTime;
-        }
-        else if (handleActive)
-        {
-            firePullVelocity -= (fireNaturalDecreasePower * 1.5f) * Time.deltaTime;
-        }
 
         //check if the position is at the beginning or end of the bar, if so set velocity to 0;
         if (firePosition >= 0.94f && firePullVelocity >= 0f)
         {
-            
             firePullVelocity = 0f;
         }
         else if (firePosition <= 0.06f && firePullVelocity <= 0.0f)
@@ -235,6 +238,11 @@ public class PressureMinigame : MonoBehaviour
         
     }
 
+    public void SetFireLocation(float Location)
+    {
+        firePosition = Location;
+    }
+
     public void ActivateMinigame(bool activateMinigame)
     {
         goalObject.GetComponent<Image>().enabled = activateMinigame;
@@ -254,6 +262,7 @@ public class PressureMinigame : MonoBehaviour
     //if progressbar is full Win.
     public void Win()
     {
+        firePosition = 0;
         winAmounts++;
         progressAmount = 0.0f;
     }
