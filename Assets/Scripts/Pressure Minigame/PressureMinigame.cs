@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Valve.VR.InteractionSystem;
 
 public class PressureMinigame : MonoBehaviour
 {
     [Header("stuff to keep track of")]
     public bool minigameActive;
-    [SerializeField] private bool handleActive;
     [SerializeField] public int winAmounts;
     [SerializeField] public int coalAmountDeposited;
 
     [Header("References")]
     [SerializeField] private EventManager eventManager;
+    [SerializeField] private TrainManager trainManager;
 
-    [Header("Fire Bar Objects")]
+    [Header("Pressure Bar Objects")]
     [SerializeField]
     private Transform topPivot;
     [SerializeField]
     private Transform bottemPivot;
     [SerializeField] private GameObject goalObject;
     [SerializeField] private GameObject fireObject;
+    
 
 
     [Header("Goal settings")]
@@ -147,7 +149,7 @@ public class PressureMinigame : MonoBehaviour
             
         }
 
-        if (handleActive)
+        if (trainManager.leverActive == true)
         {
             firePullVelocity -= fireDecreasePower * Time.deltaTime;
             if (firePullVelocity <= maxDecreaseVeloticy)
@@ -155,7 +157,7 @@ public class PressureMinigame : MonoBehaviour
                 firePullVelocity = maxDecreaseVeloticy;
             }
         }
-        else if (firePullVelocity < 0 && !handleActive)
+        else if (firePullVelocity < 0 && trainManager.leverActive == false)
         {
 
             firePullVelocity += fireInscreaseDegredation * Time.deltaTime;
@@ -267,11 +269,7 @@ public class PressureMinigame : MonoBehaviour
         progressAmount = 0.0f;
     }
 
-    public void ActivateLever(bool Activation)
-    {
-        handleActive = Activation;
-        Debug.Log("HandelActive: " + handleActive);
-    }
+
 
         
 }

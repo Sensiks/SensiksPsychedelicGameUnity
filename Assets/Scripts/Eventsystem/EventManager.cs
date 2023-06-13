@@ -21,9 +21,6 @@ public class EventManager : MonoBehaviour
     [SerializeField] public bool tutorialEvent4Invoked;
     [SerializeField] public UnityEvent tutorialEvent4;
 
-    [SerializeField] public bool tutorialEvent5Invoked;
-    [SerializeField] public UnityEvent tutorialEvent5;
-
     [Header("After Tutorial Event")]
     [SerializeField] public bool afterTutorialEventInvoked;
     [SerializeField] public UnityEvent afterTutorialEvent;
@@ -57,7 +54,7 @@ public class EventManager : MonoBehaviour
 
     private void Update()
     {
-        if (pressureMinigame.coalAmountDeposited == 1 && tutorialEvent1Invoked)
+        if (pressureMinigame.winAmounts == 1 && tutorialEvent1Invoked)
         {
             Debug.Log("coalAmountDeposted");
             tutorialEvent1Invoked = false;
@@ -66,7 +63,7 @@ public class EventManager : MonoBehaviour
 
         }
 
-        if (pressureMinigame.winAmounts == 1 && tutorialEvent2Invoked)
+        if (pressureMinigame.progressAmount > 0 && tutorialEvent2Invoked)
         {
             
             tutorialEvent2Invoked = false;
@@ -75,26 +72,21 @@ public class EventManager : MonoBehaviour
 
         }
 
-        if (pressureMinigame.progressAmount == 0 && tutorialEvent3Invoked)
+        if (pressureMinigame.winAmounts == 2 && tutorialEvent3Invoked)
         {
             tutorialEvent3Invoked = false;
             tutorialEvent4.Invoke();
             Debug.Log("tutorialevent4 invoked");
         }
 
-        if (pressureMinigame.winAmounts == 2 && tutorialEvent4Invoked)
+        if(pressureMinigame.winAmounts == 5 && tutorialEvent4Invoked)
         {
             tutorialEvent4Invoked = false;
-            tutorialEvent5.Invoke();
-            Debug.Log("aftertutorialevent invoked");
-        }
-
-        if(pressureMinigame.winAmounts == 6 && afterTutorialEventInvoked)
-        {
-            afterTutorialEventInvoked = false;
             threeWinEvent.Invoke();
             Debug.Log("threewinevent invoked");
         }
+
+
     }
 
     private void CheckActiveEvent()

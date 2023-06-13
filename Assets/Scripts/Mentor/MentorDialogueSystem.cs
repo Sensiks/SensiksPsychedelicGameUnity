@@ -19,16 +19,16 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> tutorialEvent2;
     public List<AudioClip> tutorialEvent3;
     public List<AudioClip> tutorialEvent4;
-    public List<AudioClip> tutorialEvent5;
+
+    [Header("MainEvent Audioclips")]
+    public List<AudioClip> threeWinEvent;
 
     [Header("MentorScaler")]
     public float updateStep = 0.1f;
     public int sampleDataLength = 1024;
     private float currentUpdateTime = 0f;
-
     public float clipLoudness;
     private float[] clipSampleData;
-
     public float sizeFactor = 1f;
     public float minSize = 0;
     public float maxSize = 500;
@@ -47,7 +47,8 @@ public class MentorDialogueSystem : MonoBehaviour
         eventManager.tutorialEvent2.AddListener(NewAudioClipList);
         eventManager.tutorialEvent3.AddListener(NewAudioClipList);
         eventManager.tutorialEvent4.AddListener(NewAudioClipList);
-        eventManager.tutorialEvent5.AddListener(NewAudioClipList);
+        eventManager.afterTutorialEvent.AddListener(NewAudioClipList);
+        eventManager.threeWinEvent.AddListener(NewAudioClipList);
     }
 
     public void FixedUpdate()
@@ -86,6 +87,11 @@ public class MentorDialogueSystem : MonoBehaviour
             UpdateAudioClips(tutorialEvent4);
             
         }
+        else if (eventManager.threeWinEventInvoked == true)
+        {
+            Debug.Log("ThreeWinEvent: " + eventManager.threeWinEventInvoked);
+            UpdateAudioClips(threeWinEvent);
+        }
     }
 
     //step 3: Transfer to list to currentaudioclips
@@ -115,7 +121,6 @@ public class MentorDialogueSystem : MonoBehaviour
         //Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
         if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
         {
-
             mentorAudioSource.clip = currentAudioClips[audioIndex];
             mentorAudioSource.Play();
             Debug.Log("currentclip: " + mentorAudioSource.clip);
