@@ -147,14 +147,22 @@ namespace Valve.VR.InteractionSystem
 			}
 
 			worldPlaneNormal = new Vector3( 0.0f, 0.0f, 0.0f );
-			worldPlaneNormal[(int)axisOfRotation] = 1.0f;
+			worldPlaneNormal[(int)axisOfRotation] = -1.0f;
 
 			localPlaneNormal = worldPlaneNormal;
 
-			if ( transform.parent )
+			if (transform.parent)
+
 			{
-				worldPlaneNormal = transform.parent.localToWorldMatrix.MultiplyVector( worldPlaneNormal ).normalized;
+
+				worldPlaneNormal = transform.parent.localToWorldMatrix.MultiplyVector(worldPlaneNormal).normalized;
+
 			}
+
+			//if ( transform.parent )
+			//{
+			//	worldPlaneNormal = transform.parent.localToWorldMatrix.MultiplyVector( worldPlaneNormal ).normalized;
+			//}
 
 			if ( limited )
 			{
@@ -286,30 +294,37 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		private Vector3 ComputeToTransformProjected( Transform xForm )
+		//private Vector3 ComputeToTransformProjected( Transform xForm )
+		//{
+		//	Vector3 toTransform = ( xForm.position - transform.position ).normalized;
+		//	Vector3 toTransformProjected = new Vector3( 0.0f, 0.0f, 0.0f );
+
+		//	// Need a non-zero distance from the hand to the center of the CircularDrive
+		//	if ( toTransform.sqrMagnitude > 0.0f )
+		//	{
+		//		toTransformProjected = Vector3.ProjectOnPlane( toTransform, worldPlaneNormal ).normalized;
+		//	}
+		//	else
+		//	{
+		//		Debug.LogFormat("<b>[SteamVR Interaction]</b> The collider needs to be a minimum distance away from the CircularDrive GameObject {0}", gameObject.ToString() );
+		//		Debug.Assert( false, string.Format("<b>[SteamVR Interaction]</b> The collider needs to be a minimum distance away from the CircularDrive GameObject {0}", gameObject.ToString() ) );
+		//	}
+
+		//	if ( debugPath && dbgPathLimit > 0 )
+		//	{
+		//		DrawDebugPath( xForm, toTransformProjected );
+		//	}
+
+		//	return toTransformProjected;
+		//}
+
+		private Vector3 ComputeToTransformProjected(Transform xForm)
+
 		{
-			Vector3 toTransform = ( xForm.position - transform.position ).normalized;
-			Vector3 toTransformProjected = new Vector3( 0.0f, 0.0f, 0.0f );
 
-			// Need a non-zero distance from the hand to the center of the CircularDrive
-			if ( toTransform.sqrMagnitude > 0.0f )
-			{
-				toTransformProjected = Vector3.ProjectOnPlane( toTransform, worldPlaneNormal ).normalized;
-			}
-			else
-			{
-				Debug.LogFormat("<b>[SteamVR Interaction]</b> The collider needs to be a minimum distance away from the CircularDrive GameObject {0}", gameObject.ToString() );
-				Debug.Assert( false, string.Format("<b>[SteamVR Interaction]</b> The collider needs to be a minimum distance away from the CircularDrive GameObject {0}", gameObject.ToString() ) );
-			}
+			return Vector3.ProjectOnPlane(transform.parent.InverseTransformVector(xForm.position - transform.position).normalized, localPlaneNormal).normalized;
 
-			if ( debugPath && dbgPathLimit > 0 )
-			{
-				DrawDebugPath( xForm, toTransformProjected );
-			}
-
-			return toTransformProjected;
 		}
-
 
 		//-------------------------------------------------
 		private void DrawDebugPath( Transform xForm, Vector3 toTransformProjected )
