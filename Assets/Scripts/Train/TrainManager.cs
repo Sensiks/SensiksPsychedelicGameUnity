@@ -22,7 +22,7 @@ public class TrainManager : MonoBehaviour
     [SerializeField] private AudioClip wistleSound;
     [SerializeField] private AudioSource lockingSoundSource;
     [SerializeField] private AudioClip lockingSound;
-
+    private bool isTriggered;
 
     public bool leverActive;
     private float acceleration = 0.3f;
@@ -65,27 +65,37 @@ public class TrainManager : MonoBehaviour
         }
     }
 
+    //if lever is at max angle, leverActive = true pressure goes down and wistle sound is played
     public void ActivateLever()
     {
-        bool Activated = true;
+        
+        // needs to be actived ones not every frame.
         if (circularDriveLever.outAngle >= circularDriveLever.maxAngle - 0.5f)
         {
-            leverActive = true;
-            wistleAudioSource.clip = wistleSound;
-            wistleAudioSource.Play();
-            wistleAudioSource.loop = true;
+            leverActive= true;
+            if(isTriggered == false)
+            {
+                wistleAudioSource.clip = wistleSound;
+                wistleAudioSource.Play();
+                wistleAudioSource.loop = true;
+                isTriggered= true;  
+            }
+            
         }
         else
         {
             leverActive = false;
             wistleAudioSource.Stop();
+            isTriggered = false;    
             
         }
 
-        if(circularDriveLever.outAngle >= circularDriveLever.maxAngle - 0.5f || circularDriveLever.outAngle <= circularDriveLever.minAngle + 0.5f)
-        {
-            lockingSoundSource.Play();
-        }
+        //if(circularDriveLever.outAngle >= circularDriveLever.maxAngle - 0.5f || circularDriveLever.outAngle <= circularDriveLever.minAngle + 0.5f)
+        //{
+        //    lockingSoundSource.Play();
+        //    Activated = true;
+        //}
+        
         //Debug.Log("HandelActive: " + leverActive);
 
 
