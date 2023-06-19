@@ -6,7 +6,7 @@ using UnityEditor;
 public class ChangeTerrein : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private EventManager eventManager;
+    [SerializeField] private TutorialEventManager eventManager;
     [SerializeField] private TerrainManager terrainManager;
     [SerializeField] private RotateScript rotateScript;
 

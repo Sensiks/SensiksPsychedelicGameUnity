@@ -13,6 +13,9 @@ public class FurnaceManager : MonoBehaviour
     [SerializeField]
     private Transform player;
 
+
+    [SerializeField] private GameObject fireLight;
+
     private float distanceToPlayer;
     private bool fireOn;
 
@@ -44,6 +47,7 @@ public class FurnaceManager : MonoBehaviour
     public void FireOn(){
         fireParticle.Play();
         smokeParticle.Play();
+        fireLight.SetActive(true);
         fireOn = true;
     }
 
@@ -51,6 +55,7 @@ public class FurnaceManager : MonoBehaviour
     {
         fireParticle.Stop();
         smokeParticle.Stop();
+        fireLight.SetActive(false);
         fireOn = false;
     }
 

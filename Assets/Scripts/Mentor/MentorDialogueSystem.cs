@@ -6,7 +6,8 @@ public class MentorDialogueSystem : MonoBehaviour
 {
     [Header("References")]
     public AudioSource mentorAudioSource;
-    public EventManager eventManager;
+    public TutorialEventManager tutorialEventManager;
+    public ChangingEventManager changingEventManager;
     public GameObject mentor;
 
     [Header("StuffToKeepTrack off")]
@@ -20,8 +21,8 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> tutorialEvent3;
     public List<AudioClip> tutorialEvent4;
 
-    [Header("MainEvent Audioclips")]
-    public List<AudioClip> threeWinEvent;
+    [Header("ChangingEvent Audioclips")]
+    public List<AudioClip> ChangeEvent1;
 
     [Header("MentorScaler")]
     public float updateStep = 0.1f;
@@ -43,12 +44,12 @@ public class MentorDialogueSystem : MonoBehaviour
     private void Start()
     {
         //mentorAudioSource = GetComponent<AudioSource>();
-        eventManager.tutorialEvent1.AddListener(NewAudioClipList);
-        eventManager.tutorialEvent2.AddListener(NewAudioClipList);
-        eventManager.tutorialEvent3.AddListener(NewAudioClipList);
-        eventManager.tutorialEvent4.AddListener(NewAudioClipList);
-        eventManager.afterTutorialEvent.AddListener(NewAudioClipList);
-        eventManager.threeWinEvent.AddListener(NewAudioClipList);
+        tutorialEventManager.tutorialEvent1.AddListener(NewAudioClipList);
+        tutorialEventManager.tutorialEvent2.AddListener(NewAudioClipList);
+        tutorialEventManager.tutorialEvent3.AddListener(NewAudioClipList);
+        tutorialEventManager.tutorialEvent4.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent1.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent2.AddListener(NewAudioClipList);
     }
 
     public void FixedUpdate()
@@ -65,32 +66,32 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
-        if (eventManager.tutorialEvent1Invoked == true)
+        if (tutorialEventManager.tutorialEvent1Invoked == true)
         {
             UpdateAudioClips(tutorialEvent1);
         }
-        else if (eventManager.tutorialEvent2Invoked == true)
+        else if (tutorialEventManager.tutorialEvent2Invoked == true)
         {
-            Debug.Log("tutorialevent2: " + eventManager.tutorialEvent2Invoked);
+            Debug.Log("tutorialevent2: " + tutorialEventManager.tutorialEvent2Invoked);
             UpdateAudioClips(tutorialEvent2);
             
         }
-        else if (eventManager.tutorialEvent3Invoked == true)
+        else if (tutorialEventManager.tutorialEvent3Invoked == true)
         {
-            Debug.Log("tutorialevent3: " + eventManager.tutorialEvent3Invoked);
+            Debug.Log("tutorialevent3: " + tutorialEventManager.tutorialEvent3Invoked);
             UpdateAudioClips(tutorialEvent3);
             
         }
-        else if (eventManager.tutorialEvent4Invoked == true)
+        else if (tutorialEventManager.tutorialEvent4Invoked == true)
         {
-            Debug.Log("tutorialevent4: " + eventManager.tutorialEvent4Invoked);
+            Debug.Log("tutorialevent4: " + tutorialEventManager.tutorialEvent4Invoked);
             UpdateAudioClips(tutorialEvent4);
             
         }
-        else if (eventManager.threeWinEventInvoked == true)
+        else if (changingEventManager.ChangingEvent1Invoked == true)
         {
-            Debug.Log("ThreeWinEvent: " + eventManager.threeWinEventInvoked);
-            UpdateAudioClips(threeWinEvent);
+            Debug.Log("ChangingEvent1: " + changingEventManager.ChangingEvent1Invoked);
+            UpdateAudioClips(ChangeEvent1);
         }
     }
 

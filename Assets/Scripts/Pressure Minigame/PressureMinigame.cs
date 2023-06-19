@@ -12,7 +12,7 @@ public class PressureMinigame : MonoBehaviour
     [SerializeField] public int coalAmountDeposited;
 
     [Header("References")]
-    [SerializeField] private EventManager eventManager;
+    [SerializeField] private TutorialEventManager eventManager;
     [SerializeField] private TrainManager trainManager;
 
     [Header("Pressure Bar Objects")]
@@ -94,7 +94,7 @@ public class PressureMinigame : MonoBehaviour
                 ProgressCheck();
                 GoalMover();
                 lastMiniGameState = MinigameState.ON;
-                Debug.Log("ON state");
+                //Debug.Log("ON state");
                 break;
 
             case MinigameState.OFF:

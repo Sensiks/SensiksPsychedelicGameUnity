@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class ChangingWhenInvisible : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private ChangingEventManager changingEventManager;
     [SerializeField] private Camera playerCamera;
     private MeshRenderer objectRenderer;
     public List<GameObject> objectPool;
-    private int currentinx = 0;
     public Transform spawnLocation;
+
+    [Header("Stuff to keep track off")]
+    private int currentinx = 0;
     public bool changerActive;
 
+    [Header("ObjectReferences")]
+    [SerializeField] private GameObject lever;
+    [SerializeField] private GameObject newObject;
 
     void Start()
     {
@@ -28,6 +35,7 @@ public class ChangingWhenInvisible : MonoBehaviour
         //Debug.Log("objectpool list: " + objectPool[currentinx]);
         if (changerActive)
         {
+            Debug.Log("changerActive");
             // Check if the object is within the camera's view frustum
             if (IsVisibleFromCamera())
             {
@@ -89,6 +97,16 @@ public class ChangingWhenInvisible : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void ChangeLever()
+    {
+        if (changingEventManager.ChangingEvent1Invoked == true)
+        {
+            lever.SetActive(false);
+            newObject.SetActive(true);
+        }
+
     }
 
 }
