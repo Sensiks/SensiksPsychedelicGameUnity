@@ -10,10 +10,14 @@ public class ChangingWhenInvisible : MonoBehaviour
     private MeshRenderer objectRenderer;
     public List<GameObject> objectPool;
     public Transform spawnLocation;
+    
+    
 
     [Header("Stuff to keep track off")]
     private int currentinx = 0;
     public bool changerActive;
+    [HideInInspector] public bool shovelChangedAndSeen;
+    public float amountOfObjectChanged;
 
     [Header("ObjectReferences")]
     [SerializeField] private GameObject lever;
@@ -41,6 +45,10 @@ public class ChangingWhenInvisible : MonoBehaviour
             {
                 // Object is visible
                 Debug.Log("Object is visible");
+                if (amountOfObjectChanged >= 1)
+                {
+                    shovelChangedAndSeen = true;
+                }
 
             }
             else
@@ -73,6 +81,8 @@ public class ChangingWhenInvisible : MonoBehaviour
         }
 
         objectPool[currentinx].SetActive(true);
+        shovelChangedAndSeen = true;
+        amountOfObjectChanged++;
     }
 
     private bool IsVisibleFromCamera()

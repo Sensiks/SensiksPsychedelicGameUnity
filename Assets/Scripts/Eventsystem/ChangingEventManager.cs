@@ -7,6 +7,7 @@ public class ChangingEventManager : MonoBehaviour
 {
     [Header("References")]
     public TutorialEventManager tutorialEventManager;
+    private ChangingWhenInvisible changingWhenInvisible;
 
 
     [Header("Events")]
@@ -25,9 +26,10 @@ public class ChangingEventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ChangingEvent1Invoked == true)
+        if(ChangingEvent1Invoked == true && changingWhenInvisible.shovelChangedAndSeen)
         {
-
+            ChangingEvent1Invoked = false;
+            ChangeEvent2.Invoke();
         }   
     }
 
