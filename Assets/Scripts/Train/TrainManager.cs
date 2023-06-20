@@ -20,8 +20,6 @@ public class TrainManager : MonoBehaviour
     [SerializeField] private AudioClip trainBackgroundSound;
     [SerializeField] private AudioSource wistleAudioSource;
     [SerializeField] private AudioClip wistleSound;
-    [SerializeField] private AudioSource lockingSoundSource;
-    [SerializeField] private AudioClip lockingSound;
     private bool isTriggered;
 
     public bool leverActive;

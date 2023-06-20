@@ -23,6 +23,8 @@ public class MentorDialogueSystem : MonoBehaviour
 
     [Header("ChangingEvent Audioclips")]
     public List<AudioClip> ChangeEvent1;
+    public List<AudioClip> ChangeEvent2;
+    public List<AudioClip> ChangeEvent3;
 
     [Header("MentorScaler")]
     public float updateStep = 0.1f;
@@ -48,18 +50,25 @@ public class MentorDialogueSystem : MonoBehaviour
         tutorialEventManager.tutorialEvent2.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent3.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent4.AddListener(NewAudioClipList);
-        changingEventManager.ChangeEvent1.AddListener(NewAudioClipList);
         changingEventManager.ChangeEvent2.AddListener(NewAudioClipList);
     }
 
     public void FixedUpdate()
     {
-        NextAudioClip();
+        
+        
+            NextAudioClip();
+        
+            
     }
 
     public void Update()
     {
-        MentorScaleWhileTalk();
+        if (mentorAudioSource.isPlaying)
+        {
+            MentorScaleWhileTalk();
+        }
+        
         
     }
 
@@ -88,10 +97,10 @@ public class MentorDialogueSystem : MonoBehaviour
             UpdateAudioClips(tutorialEvent4);
             
         }
-        else if (changingEventManager.ChangingEvent1Invoked == true)
+        else if (changingEventManager.ChangingEvent2Invoked == true)
         {
-            Debug.Log("ChangingEvent1: " + changingEventManager.ChangingEvent1Invoked);
-            UpdateAudioClips(ChangeEvent1);
+            Debug.Log("ChangingEvent1: " + changingEventManager.ChangingEvent2Invoked);
+            UpdateAudioClips(ChangeEvent2);
         }
     }
 
@@ -117,20 +126,27 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 4: Play the audio clips
     public void NextAudioClip()
     {
+
         //Debug.Log("in NextAudioClip");
         //Debug.Log(currentAudioClips);
         //Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
-        if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
+        if (currentAudioClips.Count > 0)
         {
-            mentorAudioSource.clip = currentAudioClips[audioIndex];
-            mentorAudioSource.Play();
-            Debug.Log("currentclip: " + mentorAudioSource.clip);
-            audioIndex++;
-            NextAudioClip();
-        }
-        else if (audioIndex > currentAudioClips.Count)
-        {
-            audioIndex = 0;
+            if (currentAudioClips[0] != null)
+            {
+                if (!mentorAudioSource.isPlaying && audioIndex < currentAudioClips.Count)
+                {
+                    mentorAudioSource.clip = currentAudioClips[audioIndex];
+                    mentorAudioSource.Play();
+                    Debug.Log("currentclip: " + mentorAudioSource.clip);
+                    audioIndex++;
+                    NextAudioClip();
+                }
+                else if (audioIndex > currentAudioClips.Count)
+                {
+                    audioIndex = 0;
+                }
+            }
         }
 
     }

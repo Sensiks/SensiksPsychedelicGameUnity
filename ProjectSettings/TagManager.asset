@@ -9,6 +9,7 @@ TagManager:
   - Shovel
   - CoalsInCart
   - Train
+  - TreeTwig
   layers:
   - Default
   - TransparentFX

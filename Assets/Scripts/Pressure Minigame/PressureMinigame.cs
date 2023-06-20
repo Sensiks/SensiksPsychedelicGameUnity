@@ -264,7 +264,7 @@ public class PressureMinigame : MonoBehaviour
     //if progressbar is full Win.
     public void Win()
     {
-        firePosition = 0;
+        //firePosition = 0;
         winAmounts++;
         progressAmount = 0.0f;
     }
