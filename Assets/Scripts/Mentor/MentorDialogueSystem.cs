@@ -97,9 +97,9 @@ public class MentorDialogueSystem : MonoBehaviour
             UpdateAudioClips(tutorialEvent4);
             
         }
-        else if (changingEventManager.ChangingEvent2Invoked == true)
+        else if (changingEventManager.changingEvent2Invoked == true)
         {
-            Debug.Log("ChangingEvent1: " + changingEventManager.ChangingEvent2Invoked);
+            Debug.Log("ChangingEvent1: " + changingEventManager.changingEvent2Invoked);
             UpdateAudioClips(ChangeEvent2);
         }
     }
