@@ -7,7 +7,7 @@ public class ChangingWhenInvisible : MonoBehaviour
     [Header("References")]
     [SerializeField] private ChangingEventManager changingEventManager;
     [SerializeField] private Camera playerCamera;
-    
+
     public List<GameObject> objectPoolShovel;
 
     [Header("Stuff to keep track off")]
@@ -16,8 +16,9 @@ public class ChangingWhenInvisible : MonoBehaviour
     public float amountOfObjectChanged;
 
     [Header("Shovel")]
-    public bool shovelChangedAndSeen;
+    public bool replaceShovel;
     private MeshRenderer objectRendererShovel;
+    public bool shovelChangedAndSeen;
 
     [Header("Lever")]
     [SerializeField] private bool replaceLever;
@@ -25,10 +26,17 @@ public class ChangingWhenInvisible : MonoBehaviour
     [SerializeField] private GameObject leverReplacement;
     public bool leverIsReplaced;
 
+    [Header("CoalStack")]
+    public bool replaceCoalStack;
+    [SerializeField] private GameObject coalStack;
+    [SerializeField] private GameObject coalStackReplacement;
+    private MeshRenderer objectRendererCoalStack;
+
     void Start()
     {
         UpdateList();
         objectRendererShovel = objectPoolShovel[currentinx].GetComponent<MeshRenderer>();
+        objectRendererCoalStack = coalStack.GetComponent<MeshRenderer>();
 
     }
     public void ChangeObjectActivator(bool OnorOff)
@@ -60,6 +68,10 @@ public class ChangingWhenInvisible : MonoBehaviour
                     // Object is not visible
                     Debug.Log("Object is not visible");
                     SwitchObject();
+                }
+                else if (replaceCoalStack == true)
+                {
+                    SwitchCoalStack();
                 }
                 
             }
@@ -96,16 +108,35 @@ public class ChangingWhenInvisible : MonoBehaviour
     private bool IsVisibleFromCamera()
     {
         objectRendererShovel = objectPoolShovel[currentinx].GetComponent<MeshRenderer>();
-        Debug.Log("objectMeshRenderer: " + objectRendererShovel);
-        
-        // If the object has no renderer or is not enabled, consider it invisible
-        if (objectRendererShovel == null || !objectRendererShovel.enabled)
-        {
-            return false;
-        }
-
-        // Get the object's bounds
         Bounds bounds = objectRendererShovel.bounds;
+        //for the shovel
+        if (replaceShovel == true && shovelChangedAndSeen == false)
+        {   
+            
+            Debug.Log("objectMeshRenderer: " + objectRendererShovel);
+            // If the object has no renderer or is not enabled, consider it invisible
+            if (objectRendererShovel == null || !objectRendererShovel.enabled)
+            {
+                return false;
+            }
+
+            // Get the object's bounds
+            bounds = objectRendererShovel.bounds;
+        }
+        //for the coalstack
+        else if(replaceCoalStack == true)
+        {
+            objectRendererCoalStack = coalStack.GetComponent<MeshRenderer>();
+            Debug.Log("objectMeshRenderer: " + objectRendererCoalStack);
+            // If the object has no renderer or is not enabled, consider it invisible
+            if (objectRendererCoalStack == null || !objectRendererCoalStack.enabled)
+            {
+                return false;
+            }
+
+            // Get the object's bounds
+            bounds = objectRendererCoalStack.bounds;
+        }
 
         // Check if the bounds intersect with the camera's view frustum
         if (GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(playerCamera), bounds))
@@ -114,6 +145,12 @@ public class ChangingWhenInvisible : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SwitchCoalStack()
+    {
+        coalStack.SetActive(false);
+        coalStackReplacement.SetActive(true);
     }
 
     public void ChangeLever()
@@ -130,6 +167,11 @@ public class ChangingWhenInvisible : MonoBehaviour
     public void ActivateChangeLever(bool activate)
     {
         replaceLever = activate;
+    }
+
+    public void ChangeShovel()
+    {
+
     }
 
 }

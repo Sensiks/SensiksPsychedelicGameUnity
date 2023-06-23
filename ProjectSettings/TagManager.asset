@@ -10,6 +10,8 @@ TagManager:
   - CoalsInCart
   - Train
   - TreeTwig
+  - RightHand
+  - LeftHand
   layers:
   - Default
   - TransparentFX

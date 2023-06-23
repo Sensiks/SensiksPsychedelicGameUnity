@@ -71,7 +71,7 @@ public class TutorialEventManager : MonoBehaviour
 
         }
 
-        if (pressureMinigame.progressAmount > 0 && tutorialEvent2Invoked)
+        if (pressureMinigame.progressAmount > 0.01f && tutorialEvent2Invoked)
         {
             
             tutorialEvent2Invoked = false;

@@ -9,6 +9,7 @@ public class ChangingEventManager : MonoBehaviour
     public TutorialEventManager tutorialEventManager;
     [SerializeField]private ChangingWhenInvisible changingWhenInvisible;
     [SerializeField] private Treetwig treeTwig;
+    [SerializeField] private CoalGrabber coalGrabber;
 
 
     [Header("Events")]
@@ -60,9 +61,11 @@ public class ChangingEventManager : MonoBehaviour
             Debug.Log("ChangeEvent 3 Invoked");
         }
         
-        if(changingEvent3Invoked == true)
+        if(changingEvent3Invoked == true && coalGrabber.amountPickedUp >= 1)
         {
-
+            changingEvent3Invoked = false;
+            ChangeEvent4.Invoke();
+            Debug.Log("ChangeEvent 4 Invoked");
         }
     }
 
