@@ -22,6 +22,7 @@ public class CoalGrabber : MonoBehaviour
         if(other.transform.tag == "LeftHand")
         {
             coal.SetActive(true);
+            coal.GetComponent<MeshRenderer>().enabled = true;
             Debug.Log("CoalGrabber Left");
             leftHand.AttachObject(coal, GrabTypes.Grip, Hand.AttachmentFlags.SnapOnAttach);
             amountPickedUp++;
@@ -29,13 +30,14 @@ public class CoalGrabber : MonoBehaviour
         else if (other.transform.tag == "RightHand")
         {
             coal.SetActive(true);
+            coal.GetComponent<MeshRenderer>().enabled = true;
             Debug.Log("CoalGrabber Right");
             rightHand.AttachObject(coal, GrabTypes.Grip, Hand.AttachmentFlags.SnapOnAttach);
             amountPickedUp++;
         }
     }
 
-    private void ResetCount()
+    public void ResetCount()
     {
         amountPickedUp = 0;
     }

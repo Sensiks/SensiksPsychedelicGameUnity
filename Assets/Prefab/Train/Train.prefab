@@ -1149,6 +1149,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 140739753, guid: 623171d635c811948999b6b0a5f70310, type: 3}
+      propertyPath: m_VersionIndex
+      value: 5438
+      objectReference: {fileID: 0}
     - target: {fileID: 275441325, guid: 623171d635c811948999b6b0a5f70310, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1161,6 +1165,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 275441329, guid: 623171d635c811948999b6b0a5f70310, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2764
+      objectReference: {fileID: 0}
     - target: {fileID: 1773385027, guid: 623171d635c811948999b6b0a5f70310, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1172,6 +1180,10 @@ PrefabInstance:
     - target: {fileID: 1773385031, guid: 623171d635c811948999b6b0a5f70310, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773385031, guid: 623171d635c811948999b6b0a5f70310, type: 3}
+      propertyPath: m_VersionIndex
+      value: 2860
       objectReference: {fileID: 0}
     - target: {fileID: 1983105006, guid: 623171d635c811948999b6b0a5f70310, type: 3}
       propertyPath: pressureMinigame
@@ -1191,6 +1203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446224096526922163, guid: 623171d635c811948999b6b0a5f70310,
+        type: 3}
+      propertyPath: m_VersionIndex
+      value: 4546
       objectReference: {fileID: 0}
     - target: {fileID: 8553134423030651613, guid: 623171d635c811948999b6b0a5f70310,
         type: 3}

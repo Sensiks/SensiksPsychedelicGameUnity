@@ -15,6 +15,7 @@ public class MentorDialogueSystem : MonoBehaviour
     private int nmr = 0;
     public List<AudioClip> currentAudioClips;
 
+
     [Header("TutorialEvents")]
     public List<AudioClip> tutorialEvent1;
     public List<AudioClip> tutorialEvent2;
@@ -25,6 +26,9 @@ public class MentorDialogueSystem : MonoBehaviour
     public List<AudioClip> ChangeEvent1;
     public List<AudioClip> ChangeEvent2;
     public List<AudioClip> ChangeEvent3;
+    public List<AudioClip> ChangeEvent4;
+    public List<AudioClip> ChangeEvent5;
+    public List<AudioClip> ChangeEvent6;
 
     [Header("MentorScaler")]
     public float updateStep = 0.1f;
@@ -51,15 +55,15 @@ public class MentorDialogueSystem : MonoBehaviour
         tutorialEventManager.tutorialEvent3.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent4.AddListener(NewAudioClipList);
         changingEventManager.ChangeEvent2.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent3.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent4.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent5.AddListener(NewAudioClipList);
+        changingEventManager.ChangeEvent6.AddListener(NewAudioClipList);
     }
 
     public void FixedUpdate()
     {
-        
-        
             NextAudioClip();
-        
-            
     }
 
     public void Update()
@@ -99,8 +103,18 @@ public class MentorDialogueSystem : MonoBehaviour
         }
         else if (changingEventManager.changingEvent2Invoked == true)
         {
-            Debug.Log("ChangingEvent1: " + changingEventManager.changingEvent2Invoked);
+            Debug.Log("ChangingEvent2: " + changingEventManager.changingEvent2Invoked);
             UpdateAudioClips(ChangeEvent2);
+        }
+        else if (changingEventManager.changingEvent3Invoked == true)
+        {
+            Debug.Log("ChangingEvent3: " + changingEventManager.changingEvent3Invoked);
+            UpdateAudioClips(ChangeEvent3); 
+        }
+        else if (changingEventManager.changingEvent4Invoked == true)
+        {
+            Debug.Log("ChangingEvent4: " + changingEventManager.changingEvent4Invoked);
+            UpdateAudioClips(ChangeEvent4);
         }
     }
 
@@ -126,10 +140,6 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 4: Play the audio clips
     public void NextAudioClip()
     {
-
-        //Debug.Log("in NextAudioClip");
-        //Debug.Log(currentAudioClips);
-        //Debug.Log("audioIndex: " + audioIndex + "currentaudioclip count: " + currentAudioClips.Count + "audiosource is playering: " + mentorAudioSource.isPlaying);
         if (currentAudioClips.Count > 0)
         {
             if (currentAudioClips[0] != null)
@@ -150,6 +160,7 @@ public class MentorDialogueSystem : MonoBehaviour
         }
 
     }
+
 
     // SCALE MENTOR WHILE IT IS TALKING
     public void MentorScaleWhileTalk()

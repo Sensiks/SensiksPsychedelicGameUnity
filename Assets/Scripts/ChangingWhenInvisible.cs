@@ -28,7 +28,8 @@ public class ChangingWhenInvisible : MonoBehaviour
 
     [Header("CoalStack")]
     public bool replaceCoalStack;
-    [SerializeField] private GameObject coalStack;
+    [SerializeField] private MeshRenderer coalStackMesh;
+    [SerializeField] private GameObject coalStackObject;
     [SerializeField] private GameObject coalStackReplacement;
     private MeshRenderer objectRendererCoalStack;
 
@@ -36,7 +37,7 @@ public class ChangingWhenInvisible : MonoBehaviour
     {
         UpdateList();
         objectRendererShovel = objectPoolShovel[currentinx].GetComponent<MeshRenderer>();
-        objectRendererCoalStack = coalStack.GetComponent<MeshRenderer>();
+        objectRendererCoalStack = coalStackMesh.GetComponent<MeshRenderer>();
 
     }
     public void ChangeObjectActivator(bool OnorOff)
@@ -49,7 +50,7 @@ public class ChangingWhenInvisible : MonoBehaviour
         //Debug.Log("objectpool list: " + objectPool[currentinx]);
         if (changerActive)
         {
-            Debug.Log("changerActive");
+            //Debug.Log("changerActive");
             // Check if the object is within the camera's view frustum
             if (IsVisibleFromCamera())
             {
@@ -63,10 +64,12 @@ public class ChangingWhenInvisible : MonoBehaviour
             }
             else
             {
-                if (shovelChangedAndSeen == false)
+                // Object is not visible
+                Debug.Log("Object is not visible");
+                Debug.Log("isvisiblefromcamera: " + IsVisibleFromCamera());
+                if (shovelChangedAndSeen == false && replaceShovel == true)
                 {
-                    // Object is not visible
-                    Debug.Log("Object is not visible");
+                    
                     SwitchObject();
                 }
                 else if (replaceCoalStack == true)
@@ -126,7 +129,9 @@ public class ChangingWhenInvisible : MonoBehaviour
         //for the coalstack
         else if(replaceCoalStack == true)
         {
-            objectRendererCoalStack = coalStack.GetComponent<MeshRenderer>();
+            objectRendererCoalStack = coalStackMesh.GetComponent<MeshRenderer>();
+            // Get the object's bounds
+            bounds = objectRendererCoalStack.bounds;
             Debug.Log("objectMeshRenderer: " + objectRendererCoalStack);
             // If the object has no renderer or is not enabled, consider it invisible
             if (objectRendererCoalStack == null || !objectRendererCoalStack.enabled)
@@ -134,8 +139,6 @@ public class ChangingWhenInvisible : MonoBehaviour
                 return false;
             }
 
-            // Get the object's bounds
-            bounds = objectRendererCoalStack.bounds;
         }
 
         // Check if the bounds intersect with the camera's view frustum
@@ -149,7 +152,7 @@ public class ChangingWhenInvisible : MonoBehaviour
 
     public void SwitchCoalStack()
     {
-        coalStack.SetActive(false);
+        coalStackObject.SetActive(false);
         coalStackReplacement.SetActive(true);
     }
 
@@ -169,9 +172,14 @@ public class ChangingWhenInvisible : MonoBehaviour
         replaceLever = activate;
     }
 
-    public void ChangeShovel()
+    public void ActivateCoalChanger(bool Activation)
     {
+        replaceCoalStack = Activation;
+    }
 
+    public void ActivateShovelChanger(bool Activation)
+    {
+        replaceShovel = Activation;
     }
 
 }
