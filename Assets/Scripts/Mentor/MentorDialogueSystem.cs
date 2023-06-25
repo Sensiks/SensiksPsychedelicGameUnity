@@ -116,6 +116,16 @@ public class MentorDialogueSystem : MonoBehaviour
             Debug.Log("ChangingEvent4: " + changingEventManager.changingEvent4Invoked);
             UpdateAudioClips(ChangeEvent4);
         }
+        else if (changingEventManager.changingEvent5Invoked == true)
+        {
+            Debug.Log("ChangingEvent4: " + changingEventManager.changingEvent5Invoked);
+            UpdateAudioClips(ChangeEvent5);
+        }
+        else if (changingEventManager.changingEvent6Invoked == true)
+        {
+            Debug.Log("ChangingEvent4: " + changingEventManager.changingEvent6Invoked);
+            UpdateAudioClips(ChangeEvent6);
+        }
     }
 
     //step 3: Transfer to list to currentaudioclips

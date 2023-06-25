@@ -30,12 +30,16 @@ public class ChangeTerrein : MonoBehaviour
         {
             //Check what quater is the opposite quater
             case 0:
+                ChangeTerrainToForrest(2);
+                break;
             case 1:
-                ChangeTerrainToForrest(terrainManager.quarterIndx += 2);
+                ChangeTerrainToForrest(3);
                 break; 
             case 2:
+                ChangeTerrainToForrest(0);
+                break;
             case 3:
-                ChangeTerrainToForrest(terrainManager.quarterIndx - 2);
+                ChangeTerrainToForrest(1);
                 break;
         }
         terrainManager.changedTerrains++;

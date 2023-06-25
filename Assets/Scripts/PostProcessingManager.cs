@@ -21,6 +21,8 @@ public class PostProcessingManager : MonoBehaviour
     
     private void Start()
     {
+        SwampVolume.weight = 1f;
+        forestVolume.weight = 0f;
         forestVolumeProfiler.TryGet<ColorAdjustments>(out colorAdjustments);
         hueShiftValue = colorAdjustments.hueShift.value;
 
@@ -53,8 +55,8 @@ public class PostProcessingManager : MonoBehaviour
     {
         while (forestVolume.weight < 1f)
         {
-            forestVolume.weight += volumeWeightAccelerator;
-            SwampVolume.weight -= volumeWeightAccelerator;
+            forestVolume.weight += volumeWeightAccelerator * Time.deltaTime;
+            SwampVolume.weight -= volumeWeightAccelerator * Time.deltaTime;
         }
 
             yield return null;

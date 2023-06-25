@@ -116,7 +116,7 @@ public class ChangingWhenInvisible : MonoBehaviour
         if (replaceShovel == true && shovelChangedAndSeen == false)
         {   
             
-            Debug.Log("objectMeshRenderer: " + objectRendererShovel);
+            //Debug.Log("objectMeshRenderer: " + objectRendererShovel);
             // If the object has no renderer or is not enabled, consider it invisible
             if (objectRendererShovel == null || !objectRendererShovel.enabled)
             {
