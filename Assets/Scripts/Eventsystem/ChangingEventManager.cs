@@ -67,6 +67,20 @@ public class ChangingEventManager : MonoBehaviour
             ChangeEvent4.Invoke();
             Debug.Log("ChangeEvent 4 Invoked");
         }
+
+        if(changingEvent4Invoked == true && changingWhenInvisible.leverIsReplaced == true)
+        {
+            changingEvent4Invoked = false;
+            ChangeEvent5.Invoke();
+            Debug.Log("ChangeEvent 5 Invoked");
+        }
+
+        if(changingEvent5Invoked == true )
+        {
+            changingEvent5Invoked = false;
+            ChangeEvent6.Invoke();
+            Debug.Log("ChangeEvent 6 Invoked");
+        }
     }
 
 

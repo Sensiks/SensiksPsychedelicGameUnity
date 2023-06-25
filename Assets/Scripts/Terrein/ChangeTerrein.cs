@@ -31,17 +31,17 @@ public class ChangeTerrein : MonoBehaviour
     //Select right terrain tile to be replaced
     private void SelectTerrain()
     {
-        terrainToBeRoteted = terrainManager.beachTerrains[terrainManager.changedTerrains].GetComponent<Terrain>();
+        terrainToBeRoteted = terrainManager.swampTerrains[terrainManager.changedTerrains].GetComponent<Terrain>();
         switch (terrainManager.quarterIndx)
         {
             //Check what quater is the opposite quater
             case 0:
             case 1:
-                ChangeTerrainToOcean(terrainManager.quarterIndx + 2);
+                
                 break; 
             case 2:
             case 3:
-                ChangeTerrainToOcean(terrainManager.quarterIndx - 2);
+                
                 break;
         }
         terrainManager.changedTerrains++;
@@ -58,7 +58,7 @@ public class ChangeTerrein : MonoBehaviour
     private void ChangeTerrainToOcean(int selectedTerrein)
     {
 
-        if (event1Active == true && terrainManager.changedTerrains <= terrainManager.beachTerrains.Count)
+        if (event1Active == true && terrainManager.changedTerrains <= terrainManager.swampTerrains.Count)
         {
             
             //Debug.Log("changedTerrains " + terrainManager.changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
@@ -72,10 +72,10 @@ public class ChangeTerrein : MonoBehaviour
             terrainManager.forrestTerrains[selectedTerrein].SetActive(false);
 
             //turn on the the new terrain.
-            terrainManager.beachTerrains[terrainManager.changedTerrains].SetActive(true);
+            terrainManager.swampTerrains[terrainManager.changedTerrains].SetActive(true);
 
             //set the position of the new terrain.
-            terrainManager.beachTerrains[terrainManager.changedTerrains].transform.position = locationNewTerrain;
+            terrainManager.swampTerrains[terrainManager.changedTerrains].transform.position = locationNewTerrain;
 
             //Rotate the terrein to its right position (has to be done like this terrein can't be rotated via the transform)
             //switch (terrainManager.quarterIndx)
@@ -98,7 +98,7 @@ public class ChangeTerrein : MonoBehaviour
             //}
 
             //reset changedTerrains
-            if (terrainManager.changedTerrains > terrainManager.beachTerrains.Count)
+            if (terrainManager.changedTerrains > terrainManager.swampTerrains.Count)
             {
                 terrainManager.changedTerrains = 0;
             }

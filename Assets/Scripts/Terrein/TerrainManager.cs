@@ -5,7 +5,7 @@ using UnityEngine;
 public class TerrainManager : MonoBehaviour
 {
     [SerializeField] public List<GameObject> forrestTerrains;
-    [SerializeField] public List<GameObject> beachTerrains;
+    [SerializeField] public List<GameObject> swampTerrains;
     [HideInInspector] public int quarterIndx, changedTerrains;
     public bool changeTerrainActive;
 

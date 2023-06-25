@@ -162,6 +162,7 @@ public class ChangingWhenInvisible : MonoBehaviour
         {
             lever.SetActive(false);
             leverReplacement.SetActive(true);
+            leverIsReplaced = true;
             Debug.Log("ChangeLever");
 
         }
