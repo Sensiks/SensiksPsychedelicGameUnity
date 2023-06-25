@@ -55,7 +55,7 @@ public class ChangingWhenInvisible : MonoBehaviour
             if (IsVisibleFromCamera())
             {
                 // Object is visible
-                Debug.Log("Object is visible");
+                //Debug.Log("Object is visible");
                 if (amountOfObjectChanged >= 1)
                 {
                     shovelChangedAndSeen = true;
@@ -65,8 +65,8 @@ public class ChangingWhenInvisible : MonoBehaviour
             else
             {
                 // Object is not visible
-                Debug.Log("Object is not visible");
-                Debug.Log("isvisiblefromcamera: " + IsVisibleFromCamera());
+                //Debug.Log("Object is not visible");
+                //Debug.Log("isvisiblefromcamera: " + IsVisibleFromCamera());
                 if (shovelChangedAndSeen == false && replaceShovel == true)
                 {
                     

@@ -31,6 +31,9 @@ public class ChangingEventManager : MonoBehaviour
     [SerializeField] public bool changingEvent6Invoked;
     [SerializeField] public UnityEvent ChangeEvent6;
 
+    [SerializeField] public bool changingEvent7Invoked;
+    [SerializeField] public UnityEvent ChangeEvent7;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +43,7 @@ public class ChangingEventManager : MonoBehaviour
         ChangeEvent4.AddListener(() => changingEvent4Invoked = true);
         ChangeEvent5.AddListener(() => changingEvent5Invoked = true);
         ChangeEvent6.AddListener(() => changingEvent6Invoked = true);
+        ChangeEvent7.AddListener(() => changingEvent7Invoked = true);
     }
 
 

@@ -10,12 +10,7 @@ public class ChangeTerrein : MonoBehaviour
     [SerializeField] private TerrainManager terrainManager;
     [SerializeField] private RotateScript rotateScript;
 
-
-    public Terrain terrainToBeRoteted;
-
-
-    
-    public bool event1Active;
+    public bool changeTerrain;
     
     [SerializeField]
     private int amountOfRounds;
@@ -31,17 +26,16 @@ public class ChangeTerrein : MonoBehaviour
     //Select right terrain tile to be replaced
     private void SelectTerrain()
     {
-        terrainToBeRoteted = terrainManager.swampTerrains[terrainManager.changedTerrains].GetComponent<Terrain>();
         switch (terrainManager.quarterIndx)
         {
             //Check what quater is the opposite quater
             case 0:
             case 1:
-                
+                ChangeTerrainToForrest(terrainManager.quarterIndx += 2);
                 break; 
             case 2:
             case 3:
-                
+                ChangeTerrainToForrest(terrainManager.quarterIndx - 2);
                 break;
         }
         terrainManager.changedTerrains++;
@@ -55,27 +49,24 @@ public class ChangeTerrein : MonoBehaviour
     }
 
     //Replace terrein tile
-    private void ChangeTerrainToOcean(int selectedTerrein)
+    private void ChangeTerrainToForrest(int selectedTerrein)
     {
-
-        if (event1Active == true && terrainManager.changedTerrains <= terrainManager.swampTerrains.Count)
+        Debug.Log("selectedTerrein: " + selectedTerrein);
+        if (terrainManager.changedTerrains <= terrainManager.forrestTerrains.Count)
         {
             
             //Debug.Log("changedTerrains " + terrainManager.changedTerrains + "beachterrain.count " + terrainManager.beachTerrains.Count);
             //Debug.Log("quarterIndx: " + terrainManager.quarterIndx);
             
-            //get the location of new terrain
-            Vector3 locationNewTerrain;
-            locationNewTerrain = terrainManager.forrestTerrains[selectedTerrein].transform.position;
+           
 
             //turn off old terrain
-            terrainManager.forrestTerrains[selectedTerrein].SetActive(false);
+            terrainManager.swampTerrains[selectedTerrein].SetActive(false);
 
             //turn on the the new terrain.
-            terrainManager.swampTerrains[terrainManager.changedTerrains].SetActive(true);
+            terrainManager.forrestTerrains[selectedTerrein].SetActive(true);
 
             //set the position of the new terrain.
-            terrainManager.swampTerrains[terrainManager.changedTerrains].transform.position = locationNewTerrain;
 
             //Rotate the terrein to its right position (has to be done like this terrein can't be rotated via the transform)
             //switch (terrainManager.quarterIndx)
@@ -110,6 +101,6 @@ public class ChangeTerrein : MonoBehaviour
         //Look for terrain component !!still needs to be saved
 
 
-        rotateScript.RotateTerrain(terrainToBeRoteted);
+        //rotateScript.RotateTerrain(terrainToBeRoteted);
     }
 }
