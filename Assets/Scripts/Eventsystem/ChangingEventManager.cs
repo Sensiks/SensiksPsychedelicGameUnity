@@ -53,6 +53,7 @@ public class ChangingEventManager : MonoBehaviour
     {
         if(changingEvent1Invoked == true && changingWhenInvisible.shovelChangedAndSeen == true)
         {
+            tutorialEventManager.skipTutotial = true;
             changingEvent1Invoked = false;
             ChangeEvent2.Invoke();
             Debug.Log("ChangeEvent 2 Invoked");

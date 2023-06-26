@@ -8,6 +8,8 @@ public class MentorManager : MonoBehaviour
     public GameObject mentor;
     public float travelDuration;
 
+    public bool mentorPickedUp;
+
     public void MoveNextTransform(Transform nextCheckpoint)
     {
         StartCoroutine(MoveObject(nextCheckpoint));
@@ -30,6 +32,11 @@ public class MentorManager : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public void MentorPickedUp()
+    {
+        mentorPickedUp = true;
     }
 
     

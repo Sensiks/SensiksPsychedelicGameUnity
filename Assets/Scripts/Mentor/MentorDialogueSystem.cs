@@ -8,6 +8,7 @@ public class MentorDialogueSystem : MonoBehaviour
     public AudioSource mentorAudioSource;
     public TutorialEventManager tutorialEventManager;
     public ChangingEventManager changingEventManager;
+    public BeginEventManager beginEventManager;
     public GameObject mentor;
 
     [Header("StuffToKeepTrack off")]
@@ -15,6 +16,8 @@ public class MentorDialogueSystem : MonoBehaviour
     private int nmr = 0;
     public List<AudioClip> currentAudioClips;
 
+    [Header("BeginEvent")]
+    public List<AudioClip> beginEvent1;
 
     [Header("TutorialEvents")]
     public List<AudioClip> tutorialEvent1;
@@ -50,6 +53,7 @@ public class MentorDialogueSystem : MonoBehaviour
     private void Start()
     {
         //mentorAudioSource = GetComponent<AudioSource>();
+        beginEventManager.beginEvent1.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent1.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent2.AddListener(NewAudioClipList);
         tutorialEventManager.tutorialEvent3.AddListener(NewAudioClipList);
@@ -59,6 +63,7 @@ public class MentorDialogueSystem : MonoBehaviour
         changingEventManager.ChangeEvent4.AddListener(NewAudioClipList);
         changingEventManager.ChangeEvent5.AddListener(NewAudioClipList);
         changingEventManager.ChangeEvent6.AddListener(NewAudioClipList);
+        
     }
 
     public void FixedUpdate()
@@ -79,7 +84,11 @@ public class MentorDialogueSystem : MonoBehaviour
     //step 2: Choose a new list to listen to
     private void NewAudioClipList()
     {
-        if (tutorialEventManager.tutorialEvent1Invoked == true)
+        if(beginEventManager.beginEvent1Invoked == true)
+        {
+            UpdateAudioClips(beginEvent1);
+        }
+        else if (tutorialEventManager.tutorialEvent1Invoked == true)
         {
             UpdateAudioClips(tutorialEvent1);
         }

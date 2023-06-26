@@ -46,53 +46,47 @@ public class TutorialEventManager : MonoBehaviour
 
     public void Start()
     {
-        if(skipTutotial == true)
-        {
-            Debug.Log("ChangeEvent1 invoked");
-            changingEventManager.ChangeEvent1.Invoke();
-            
-        }
-        else
-        {
-            tutorialEvent1.Invoke();
-            Debug.Log("tutorialevent1 invoked");
-        }
+      
         
     }
 
     private void Update()
     {
-        if (pressureMinigame.winAmounts == 1 && tutorialEvent1Invoked)
+        if (skipTutotial == false)
         {
-            Debug.Log("coalAmountDeposted");
-            tutorialEvent1Invoked = false;
-            tutorialEvent2.Invoke();
-            Debug.Log("tutorialevent2 invoked");
+            if (pressureMinigame.winAmounts == 1 && tutorialEvent1Invoked)
+            {
+                Debug.Log("coalAmountDeposted");
+                tutorialEvent1Invoked = false;
+                tutorialEvent2.Invoke();
+                Debug.Log("tutorialevent2 invoked");
 
+            }
+
+            if (pressureMinigame.progressAmount > 0.01f && tutorialEvent2Invoked)
+            {
+
+                tutorialEvent2Invoked = false;
+                tutorialEvent3.Invoke();
+                Debug.Log("tutorialevent3 invoked");
+
+            }
+
+            if (pressureMinigame.winAmounts == 2 && tutorialEvent3Invoked)
+            {
+                tutorialEvent3Invoked = false;
+                tutorialEvent4.Invoke();
+                Debug.Log("tutorialevent4 invoked");
+            }
+
+            if (pressureMinigame.winAmounts == 5 && tutorialEvent4Invoked)
+            {
+                tutorialEvent4Invoked = false;
+                changingEventManager.ChangeEvent1.Invoke();
+                Debug.Log("threewinevent invoked");
+            }
         }
-
-        if (pressureMinigame.progressAmount > 0.01f && tutorialEvent2Invoked)
-        {
-            
-            tutorialEvent2Invoked = false;
-            tutorialEvent3.Invoke();
-            Debug.Log("tutorialevent3 invoked");
-
-        }
-
-        if (pressureMinigame.winAmounts == 2 && tutorialEvent3Invoked)
-        {
-            tutorialEvent3Invoked = false;
-            tutorialEvent4.Invoke();
-            Debug.Log("tutorialevent4 invoked");
-        }
-
-        if(pressureMinigame.winAmounts == 5 && tutorialEvent4Invoked)
-        {
-            tutorialEvent4Invoked = false;
-            changingEventManager.ChangeEvent1.Invoke();
-            Debug.Log("threewinevent invoked");
-        }
+        
 
 
     }
