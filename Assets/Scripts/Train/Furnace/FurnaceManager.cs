@@ -12,6 +12,7 @@ public class FurnaceManager : MonoBehaviour
     private float minDistance, maxDistance;
     [SerializeField]
     private Transform player;
+    [SerializeField] private SensificationManager sensiManager;
 
 
     [SerializeField] private GameObject fireLight;
@@ -22,7 +23,7 @@ public class FurnaceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //fireParticle = GetComponent<ParticleSystem>();
+        
         FireOff();
     }
 
@@ -35,12 +36,14 @@ public class FurnaceManager : MonoBehaviour
         {
             SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0.5f);
             SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0.5f);
-            //Debug.Log("heater on");
+            sensiManager.SetNewSmell(SensificationManager.EnumScent.COAL);
+            Debug.Log("heater on");
         } else
         {
+            sensiManager.StopCycle();
             SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0f);
             SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0f);
-            //Debug.Log("heater off");
+            Debug.Log("heater off");
         }
     }
 

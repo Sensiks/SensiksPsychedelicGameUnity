@@ -148,7 +148,9 @@ public class MentorDialogueSystem : MonoBehaviour
         {
             Debug.Log("cliptoTransfer: " + clipToTranfer);
             currentAudioClips.Add(clipToTranfer);
+
         }
+        audioIndex = 0;
 
         Debug.Log("Update Audio Clips after foreach: " + currentAudioClips[nmr]);
 
@@ -171,10 +173,10 @@ public class MentorDialogueSystem : MonoBehaviour
                     audioIndex++;
                     NextAudioClip();
                 }
-                else if (audioIndex > currentAudioClips.Count)
-                {
-                    audioIndex = 0;
-                }
+                //else if (audioIndex > currentAudioClips.Count)
+                //{
+                    
+                //}
             }
         }
 
