@@ -23,6 +23,11 @@ public class ChangeTerrein : MonoBehaviour
 
             terrainManager.changedTerrains++;
             terrainManager.quarterIndx++;
+
+            if (terrainManager.quarterIndx > 3)
+            {
+                terrainManager.quarterIndx = 0;
+            }
         }
 
         
@@ -49,10 +54,7 @@ public class ChangeTerrein : MonoBehaviour
         }
         
 
-        if (terrainManager.quarterIndx > 3)
-        {
-            terrainManager.quarterIndx = 0;
-        }
+        
 
     }
 

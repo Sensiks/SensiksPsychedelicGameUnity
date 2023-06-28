@@ -32,6 +32,7 @@ public class PressureMinigame : MonoBehaviour
     private float goalSpeed;
     [SerializeField] private float smoothMotion = 1f;
     [SerializeField] private float goalSize;
+    private bool minigameWonTrigger;
 
     [Header("Fire settings")]
     [SerializeField] Transform fire;
@@ -190,13 +191,25 @@ public class PressureMinigame : MonoBehaviour
 
         if (miniGameState == MinigameState.ON)
         {
-            goalTimer -= Time.deltaTime;
-            if (goalTimer <= 0f)
-            {
-                goalTimer = Random.value * goalTimerMultiplier;
+            //goalTimer -= Time.deltaTime;
+            //if (goalTimer <= 0f)
+            //{
+            //    goalTimer = Random.value * goalTimerMultiplier;
 
+            //    nextGoalDestination = Random.value;
+            //}
+
+            if(minigameWonTrigger == true)
+            {
+                minigameWonTrigger = false;
                 nextGoalDestination = Random.value;
+                //while (goalPosition < nextGoalDestination + currentWidth/2 || goalPosition > nextGoalDestination - currentWidth/2)
+                //{
+                //    Debug.Log("in while loop");
+                //    nextGoalDestination = Random.value;
+                //}
             }
+
             goalPosition = Mathf.SmoothDamp(goalPosition, nextGoalDestination, ref goalSpeed, smoothMotion);
         }
 
@@ -267,6 +280,7 @@ public class PressureMinigame : MonoBehaviour
         //firePosition = 0;
         winAmounts++;
         progressAmount = 0.0f;
+        minigameWonTrigger = true;
     }
 
 

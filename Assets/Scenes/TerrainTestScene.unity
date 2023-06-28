@@ -3056,8 +3056,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1004008853}
+  m_Children: []
   m_Father: {fileID: 1643198834}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6198,6 +6197,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4240423762307214, guid: 0d418d39d811ace4895bcbd985fd909f,
     type: 3}
   m_PrefabInstance: {fileID: 253124364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &255254119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3964274474566602519, guid: 42c53210cc818b048b34feec8e1b0718,
+    type: 3}
+  m_PrefabInstance: {fileID: 1983105001}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &255305436
 PrefabInstance:
@@ -9976,6 +9981,78 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1598090192}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &437603482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437603483}
+  - component: {fileID: 437603486}
+  - component: {fileID: 437603485}
+  - component: {fileID: 437603484}
+  m_Layer: 0
+  m_Name: WindSesifyBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437603483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437603482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.586, y: 2.45, z: -3.741}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 255254119}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &437603484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437603482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4393e6a801805584fbce1114860465f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &437603485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437603482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7591808, y: 1.453772, z: 1.8277192}
+  m_Center: {x: -3.187155, y: 0.112755015, z: -0.41385454}
+--- !u!65 &437603486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437603482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000414, y: 1.6121491, z: 1.5682291}
+  m_Center: {x: -0.07949413, y: 0.006621639, z: -0.28412056}
 --- !u!1001 &437846705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19384,6 +19461,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 555568331}
+        m_TargetAssemblyTypeName: MentorManager, Assembly-CSharp
+        m_MethodName: MoveNextTransform
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1953895593}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   tutorialEvent2Invoked: 0
   tutorialEvent2:
     m_PersistentCalls:
@@ -23645,52 +23734,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1003094975}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1004008852
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1004008853}
-  - component: {fileID: 1004008854}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1004008853
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004008852}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 160619248}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!182 &1004008854
-WindZone:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004008852}
-  m_Enabled: 1
-  m_Mode: 0
-  m_Radius: 20
-  m_WindMain: 1
-  m_WindTurbulence: 1
-  m_WindPulseMagnitude: 0.5
-  m_WindPulseFrequency: 0.01
 --- !u!4 &1005660932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4343607351637222, guid: a42f233d3ffc16b4e8c60406dddf5a74,
