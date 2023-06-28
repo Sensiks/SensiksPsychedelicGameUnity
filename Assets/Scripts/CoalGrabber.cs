@@ -18,7 +18,7 @@ public class CoalGrabber : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("other collider: " + other);
+        //Debug.Log("other collider: " + other);
         if(other.transform.tag == "LeftHand")
         {
             coal.SetActive(true);

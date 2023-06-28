@@ -34,14 +34,17 @@ public class BeginEventManager : MonoBehaviour
         else
         {
             beginEvent1.Invoke();
+            
+            Debug.Log("");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(mentorManager.mentorPickedUp == true)
+        if(beginEvent1Invoked == true && mentorManager.mentorPickedUp == true)
         {
+            beginEvent1Invoked = false;
             tutorialEventManager.tutorialEvent1.Invoke();
         }
     }

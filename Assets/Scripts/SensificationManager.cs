@@ -30,7 +30,7 @@ public class SensificationManager : MonoBehaviour
     {
         if (!smellIsTriggering)
         {
-            Debug.Log("activeSmellCoroutine: " + activeSmellCoroutine);
+            Debug.Log("activeSmellCoroutine: " + activeSmellCoroutine + "current smell: " + currentScent);
             activeSmellCoroutine = StartCoroutine(TriggerSmellCoroutine());
         }
         

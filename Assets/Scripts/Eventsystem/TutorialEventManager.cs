@@ -51,25 +51,20 @@ public class TutorialEventManager : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (skipTutotial == false)
-        {
+    {             
             if (pressureMinigame.winAmounts == 1 && tutorialEvent1Invoked)
             {
                 Debug.Log("coalAmountDeposted");
                 tutorialEvent1Invoked = false;
                 tutorialEvent2.Invoke();
                 Debug.Log("tutorialevent2 invoked");
-
             }
 
             if (pressureMinigame.progressAmount > 0.01f && tutorialEvent2Invoked)
             {
-
                 tutorialEvent2Invoked = false;
                 tutorialEvent3.Invoke();
                 Debug.Log("tutorialevent3 invoked");
-
             }
 
             if (pressureMinigame.winAmounts == 2 && tutorialEvent3Invoked)
@@ -85,9 +80,6 @@ public class TutorialEventManager : MonoBehaviour
                 changingEventManager.ChangeEvent1.Invoke();
                 Debug.Log("threewinevent invoked");
             }
-        }
         
-
-
     }
 }

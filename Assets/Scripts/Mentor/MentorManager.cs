@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MentorManager : MonoBehaviour
 { 
-    public MentorDialogueSystem mentorDialogueSystem;
     public GameObject mentor;
     public float travelDuration;
 
@@ -17,6 +16,7 @@ public class MentorManager : MonoBehaviour
 
     IEnumerator MoveObject(Transform nextCheckpoint)
     {
+        Debug.Log("Mentor Heading to nextCheckpoint");
         Vector3 startPosition = transform.position;
         Vector3 endPosition = nextCheckpoint.position;
 

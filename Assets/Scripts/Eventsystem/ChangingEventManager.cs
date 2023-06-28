@@ -80,12 +80,19 @@ public class ChangingEventManager : MonoBehaviour
             Debug.Log("ChangeEvent 5 Invoked");
         }
 
-        if(changingEvent5Invoked == true )
+        if(changingEvent5Invoked == true && changingWhenInvisible.replaceCoalStack == true)
         {
             changingEvent5Invoked = false;
             ChangeEvent6.Invoke();
+            Invoke("InvokeEvent7", 30f);
             Debug.Log("ChangeEvent 6 Invoked");
         }
+
+    }
+
+    void InvokeEvent7()
+    {
+        ChangeEvent7.Invoke();
     }
 
 

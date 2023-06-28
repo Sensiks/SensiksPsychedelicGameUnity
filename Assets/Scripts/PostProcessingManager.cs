@@ -62,4 +62,9 @@ public class PostProcessingManager : MonoBehaviour
             yield return null;
     }
 
+    public void HueShiftActivator(bool Activate)
+    {
+        HueShiftchangerActive = Activate;
+    }
+
 }
