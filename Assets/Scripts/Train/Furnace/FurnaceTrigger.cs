@@ -29,8 +29,6 @@ public class FurnaceTrigger : MonoBehaviour
             pressureMinigame.coalAmountDeposited++;
             coalOnShovel.ShovelSwitch(false);
             coal.GetComponent<MeshRenderer>().enabled = false;
-            //SensiksManager.SetHeaterIntensity(HeaterPosition.FRONT, 0.5f);
-            //SensiksManager.SetActiveScent(Scent.SMOKE, 0.1f);
         }
     }
     public void ChangePressureFromCoal(float newPressureFromCoal)

@@ -145,7 +145,7 @@ Material:
     - _edgeFoamAmount: 5
     - _edgeFoamCutoff: 0.7
     - _fakeSpecular: 0.3
-    - _waterDepth: 9.91
+    - _waterDepth: 5.6
     - _waterSmoothness: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,6 +153,6 @@ Material:
     - _WaterDeepColor: {r: 0.050633185, g: 0.08088237, b: 0.029736165, a: 0}
     - _WaterShallowColor: {r: 0.13237084, g: 0.17647058, b: 0.031141864, a: 0}
     - _deepColor: {r: 0.01938236, g: 0.06480328, b: 0.07036011, a: 1}
-    - _edgeFoamColor: {r: 0, g: 0.24528301, b: 0.073724076, a: 1}
+    - _edgeFoamColor: {r: 0, g: 0.24528301, b: 0.073724076, a: 0}
     - _shallowColor: {r: 0.032432277, g: 0.06657151, b: 0.0358462, a: 1}
   m_BuildTextureStacks: []

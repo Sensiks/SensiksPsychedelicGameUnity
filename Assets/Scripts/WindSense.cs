@@ -10,8 +10,19 @@ public class WindSense : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
+            Debug.Log("Turn on fan");
             SensiksManager.SetFanIntensity(FanPosition.FRONT_LEFT, 0.5f);
             SensiksManager.SetFanIntensity(FanPosition.FRONT_RIGHT, 0.5f);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            Debug.Log("Turn off fan");
+            SensiksManager.SetFanIntensity(FanPosition.FRONT_LEFT, 0f);
+            SensiksManager.SetFanIntensity(FanPosition.FRONT_RIGHT, 0f);
         }
     }
 }

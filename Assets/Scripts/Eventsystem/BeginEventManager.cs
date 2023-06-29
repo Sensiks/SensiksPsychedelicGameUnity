@@ -14,9 +14,13 @@ public class BeginEventManager : MonoBehaviour
     public bool beginEvent1Invoked;
     public UnityEvent beginEvent1;
 
+    public bool beginEventInvoked;
+    public UnityEvent beginEvent;
+
 
     public void Awake()
     {
+        beginEvent.AddListener(() => beginEventInvoked = true);
         beginEvent1.AddListener(() => beginEvent1Invoked = true);
     }
 
@@ -33,19 +37,27 @@ public class BeginEventManager : MonoBehaviour
         }
         else
         {
-            beginEvent1.Invoke();
+            beginEvent.Invoke();
             
-            Debug.Log("");
+            Debug.Log("beginEvent invoked");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(beginEventInvoked == true)
+        {
+            beginEventInvoked = false;
+            beginEvent1.Invoke();
+            Debug.Log("beginEvent1: ");
+        }
+
         if(beginEvent1Invoked == true && mentorManager.mentorPickedUp == true)
         {
             beginEvent1Invoked = false;
             tutorialEventManager.tutorialEvent1.Invoke();
+            
         }
     }
 }

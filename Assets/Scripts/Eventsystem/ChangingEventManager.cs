@@ -7,9 +7,11 @@ public class ChangingEventManager : MonoBehaviour
 {
     [Header("References")]
     public TutorialEventManager tutorialEventManager;
-    [SerializeField]private ChangingWhenInvisible changingWhenInvisible;
+    [SerializeField] private SensificationManager sensificationManager;
+    [SerializeField] private ChangingWhenInvisible changingWhenInvisible;
     [SerializeField] private Treetwig treeTwig;
     [SerializeField] private CoalGrabber coalGrabber;
+
 
 
     [Header("Events")]
@@ -77,6 +79,7 @@ public class ChangingEventManager : MonoBehaviour
         {
             changingEvent4Invoked = false;
             ChangeEvent5.Invoke();
+            sensificationManager.SetNewSmell(SensificationManager.EnumScent.FOREST);
             Debug.Log("ChangeEvent 5 Invoked");
         }
 

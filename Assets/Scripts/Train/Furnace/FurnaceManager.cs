@@ -12,7 +12,12 @@ public class FurnaceManager : MonoBehaviour
     private float minDistance, maxDistance;
     [SerializeField]
     private Transform player;
+
+    [SerializeField]
+    private bool wantsCoalSmellOn;
+
     [SerializeField] private SensificationManager sensiManager;
+    [SerializeField] private TerrainManager terrainManager;
 
 
     [SerializeField] private GameObject fireLight;
@@ -36,13 +41,29 @@ public class FurnaceManager : MonoBehaviour
         {
             SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0.5f);
             SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0.5f);
-            sensiManager.SetNewSmell(SensificationManager.EnumScent.COAL);
+
+            if (wantsCoalSmellOn)
+            {
+                sensiManager.SetNewSmell(SensificationManager.EnumScent.COAL);
+            }
+            
             Debug.Log("heater on");
         } else
         {
-            sensiManager.StopCycle();
+            //sensiManager.SetNewSmell(SensificationManager.EnumScent.SWAMP);
             SensiksManager.SetHeaterIntensity(HeaterPosition.LEFT, 0f);
             SensiksManager.SetHeaterIntensity(HeaterPosition.RIGHT, 0f);
+
+            //sensiManager.StopSmellRelease();
+
+            if(terrainManager.changeTerrainActive == false)
+            {
+                sensiManager.SetNewSmell(SensificationManager.EnumScent.SWAMP);
+            }
+            else if(terrainManager.changeTerrainActive == true)
+            {
+                sensiManager.SetNewSmell(SensificationManager.EnumScent.FOREST);
+            }
             Debug.Log("heater off");
         }
     }
