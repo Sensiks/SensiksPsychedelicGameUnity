@@ -37,6 +37,7 @@ public class TrainManager : MonoBehaviour
         ActivateLever();
     }
 
+    //changes speed to new speed (slowly)
     public void TrainSpeedChanger(float newSpeed)
     {
         StartCoroutine(IncreaseSpeed(newSpeed));

@@ -50,6 +50,7 @@ public class TutorialEventManager : MonoBehaviour
         
     }
 
+    //Checks if next event needs to invoke.
     private void Update()
     {             
             if (pressureMinigame.winAmounts == 1 && tutorialEvent1Invoked)

@@ -10,6 +10,7 @@ public class CoalOnShovel : MonoBehaviour
     [HideInInspector]
     public bool coalIsOnShovel;
 
+    //if shovel touches coal in cart 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CoalsInCart"))

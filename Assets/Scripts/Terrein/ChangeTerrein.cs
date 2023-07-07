@@ -9,6 +9,7 @@ public class ChangeTerrein : MonoBehaviour
     [SerializeField] private TerrainManager terrainManager;
     [SerializeField] private int amountOfRounds;
 
+    //If player collides with hitbox change terrain tile.
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("other transform tag" + other.transform.tag);
@@ -38,7 +39,7 @@ public class ChangeTerrein : MonoBehaviour
     {
         switch (terrainManager.quarterIndx)
         {
-            //Check what quater is the opposite quater
+            //Check what quater is the opposite quater and change the terrain tile
             case 0:
                 ChangeTerrainToForrest(2);
                 break;
@@ -58,7 +59,7 @@ public class ChangeTerrein : MonoBehaviour
 
     }
 
-    //Replace terrein tile
+    //Replace terrain tile
     private void ChangeTerrainToForrest(int selectedTerrein)
     {
         Debug.Log("selectedTerrein: " + selectedTerrein);

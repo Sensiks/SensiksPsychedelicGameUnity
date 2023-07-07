@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
+    [Header("Terrain Tiles")]
     [SerializeField] public List<GameObject> forrestTerrains;
     [SerializeField] public List<GameObject> swampTerrains;
+
+    [Header("Stuff to keep track off")]
     public int quarterIndx, changedTerrains;
     public bool changeTerrainActive;
 

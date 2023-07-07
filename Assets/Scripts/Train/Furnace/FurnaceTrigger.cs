@@ -17,7 +17,7 @@ public class FurnaceTrigger : MonoBehaviour
     [SerializeField] private float pressureFromCoal;
 
 
-
+    //if coal touches triggerbox increase pressure and turn off coal, mesh renderer from normal coal otherwise hands are turned off.
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coal")

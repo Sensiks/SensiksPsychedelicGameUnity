@@ -6,22 +6,16 @@ using Sensiks.SDK.Shared.SensiksDataTypes;
 
 public class FurnaceManager : MonoBehaviour
 {
-    [SerializeField]
-    private ParticleSystem fireParticle, smokeParticle;
-    [SerializeField]
-    private float minDistance, maxDistance;
-    [SerializeField]
-    private Transform player;
-
-    [SerializeField]
-    private bool wantsCoalSmellOn;
-
+    [Header("References")]
+    [SerializeField] private ParticleSystem fireParticle, smokeParticle;
     [SerializeField] private SensificationManager sensiManager;
     [SerializeField] private TerrainManager terrainManager;
-
-
+    [SerializeField] private Transform player;
     [SerializeField] private GameObject fireLight;
 
+    [Header("Stuff to keep track off")]
+    [SerializeField] private bool wantsCoalSmellOn;
+    [SerializeField] private float minDistance, maxDistance;
     private float distanceToPlayer;
     private bool fireOn;
 
@@ -32,7 +26,8 @@ public class FurnaceManager : MonoBehaviour
         FireOff();
     }
 
-    // Update is called once per frame
+    // Check if player is close to furnace, if so change smell to coal and turn heaters on.
+    // if not turn off heaters and return smell to swamp or forest
     void FixedUpdate()
     {
         distanceToPlayer = Vector3.Distance(player.position, fireParticle.GetComponent<Transform>().position);
