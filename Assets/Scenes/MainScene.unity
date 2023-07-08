@@ -3237,7 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173077c24d6f25d44aeaea214ebc0d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainManager: {fileID: 0}
+  terrainManager: {fileID: 432757949}
   triggerDuration: 10
   intervalDuration: 50
   currentScent: 3
